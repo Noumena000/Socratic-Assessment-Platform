@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Socratic Assessment Engine | Research Prototype</title>
+  <meta name="description" content="A public-facing concept showcase for the Socratic Assessment Engine: an AI-assisted formative assessment research prototype." />
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav">
+      <a href="#top" class="brand">Socratic Assessment Engine</a>
+      <div class="nav-links">
+        <a href="#problem">Problem</a>
+        <a href="#demo">Demo</a>
+        <a href="#workflow">Workflow</a>
+        <a href="#privacy">Privacy</a>
+        <a href="#roadmap">Roadmap</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Research prototype · AI-assisted formative assessment · Faculty-centered</p>
+        <h1>Assess reasoning through dialogue, not just final answers.</h1>
+        <p class="lead">The Socratic Assessment Engine is a concept prototype for helping instructors see how learners define terms, test assumptions, respond to objections, and revise their thinking.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#demo">View the safe demo</a>
+          <a class="button secondary" href="#privacy">See privacy posture</a>
+        </div>
+        <p class="status-note">This public showcase is intentionally limited. It does not expose the private reasoning engine, prompt architecture, API keys, learner records, or production implementation.</p>
+      </div>
+      <div class="hero-panel" aria-label="Prototype interface preview">
+        <div class="window-dots"><span></span><span></span><span></span></div>
+        <div class="mock-card active">
+          <span class="pill">Dialogue move</span>
+          <h2>Clarify the claim</h2>
+          <p>“What do you mean by duty here: rule-following, intention, obligation, or respect for persons?”</p>
+        </div>
+        <div class="mock-grid">
+          <div><strong>Definition</strong><span>Developing</span></div>
+          <div><strong>Reason</strong><span>Strong</span></div>
+          <div><strong>Counterexample</strong><span>Developing</span></div>
+          <div><strong>Revision</strong><span>Strong</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="problem" class="section two-col">
+      <div>
+        <p class="eyebrow">The instructional problem</p>
+        <h2>Traditional assessment often captures conclusions more clearly than reasoning.</h2>
+      </div>
+      <div class="card stack">
+        <p>Many student submissions show what a learner concluded, but not how the learner handled ambiguity, objections, evidence, conceptual distinctions, or revision.</p>
+        <p>This prototype explores whether structured AI-assisted dialogue can produce formative evidence of understanding while keeping instructors in control of instructional decisions.</p>
+      </div>
+    </section>
+
+    <section id="demo" class="section">
+      <div class="section-heading">
+        <p class="eyebrow">Safe public demo</p>
+        <h2>Fictional sample dialogue and formative evidence report</h2>
+        <p>No student data is used. The demo below is a static institutional showcase, suitable for meetings and early feedback conversations.</p>
+      </div>
+
+      <div class="demo-layout">
+        <aside class="demo-tabs" aria-label="Sample transcript selector">
+          <button class="tab active" data-demo="kant">Kantian Trolley Dialogue</button>
+          <button class="tab" data-demo="machine">Experience Machine Dialogue</button>
+        </aside>
+        <article class="demo-screen">
+          <div class="demo-header">
+            <div>
+              <p class="eyebrow" id="moduleTitle">HUM301 · Kantianism and the Trolley Problem</p>
+              <h3 id="demoTitle">Kantian Trolley Dialogue</h3>
+              <p id="demoSubtitle">A fictional learner clarifies duty, consequences, and persons as ends.</p>
+            </div>
+            <span class="badge">Demo mode</span>
+          </div>
+          <div id="transcript" class="transcript"></div>
+          <div class="evidence-block">
+            <h4>Evidence of understanding</h4>
+            <div id="evidence" class="evidence-grid"></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="workflow" class="section">
+      <div class="section-heading">
+        <p class="eyebrow">How it would work</p>
+        <h2>Designed around the assessment lifecycle</h2>
+      </div>
+      <div class="steps">
+        <div class="step"><span>1</span><h3>Create</h3><p>Instructor selects the concept, learning goal, and Socratic moves.</p></div>
+        <div class="step"><span>2</span><h3>Dialogue</h3><p>Learner is prompted to clarify, reason, test, and revise.</p></div>
+        <div class="step"><span>3</span><h3>Review</h3><p>System drafts formative evidence for faculty review.</p></div>
+        <div class="step"><span>4</span><h3>Export</h3><p>Instructor exports feedback or uses the report for targeted teaching.</p></div>
+      </div>
+    </section>
+
+    <section id="privacy" class="section two-col dark-panel">
+      <div>
+        <p class="eyebrow">Privacy and governance</p>
+        <h2>Built for a cautious institutional conversation.</h2>
+      </div>
+      <div class="privacy-list">
+        <p><strong>Public showcase:</strong> static, fictional, and non-operational.</p>
+        <p><strong>Private development:</strong> reasoning engine, scoring logic, prompt architecture, and API integration remain private.</p>
+        <p><strong>Production requirement:</strong> institutionally approved AI provider, secure backend, FERPA-aware data handling, retention rules, accessibility review, and faculty oversight.</p>
+      </div>
+    </section>
+
+    <section id="roadmap" class="section">
+      <div class="section-heading">
+        <p class="eyebrow">Roadmap</p>
+        <h2>From concept prototype to controlled pilot</h2>
+      </div>
+      <div class="roadmap">
+        <div><h3>Phase A</h3><p>Static showcase and fictional examples for feedback.</p></div>
+        <div><h3>Phase B</h3><p>Secure live LLM prototype with no real student records.</p></div>
+        <div><h3>Phase C</h3><p>Faculty-reviewed formative reports and rubric alignment.</p></div>
+        <div><h3>Phase D</h3><p>Institutional pilot after privacy, accessibility, and governance review.</p></div>
+      </div>
+    </section>
+
+    <section class="section meeting-brief">
+      <h2>Meeting framing</h2>
+      <p>“I am not proposing deployment yet. I am looking for strategic feedback on whether this direction could support formative assessment, where the governance risks are, and what would be required before any institutional pilot.”</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© 2026 Socratic Assessment Engine research prototype. Public showcase only.</p>
+  </footer>
+
+  <script src="assets/app.js"></script>
+</body>
+</html>
