@@ -16,7 +16,7 @@ const demos = {
     evidence: [
       ['Definition', 'Developing', 'Learner distinguishes duty from outcomes.'],
       ['Reason', 'Strong', 'Learner gives a Kantian reason rather than only a conclusion.'],
-      ['Counterexample', 'Developing', 'Learner uses a professional case to test the principle.'],
+      ['Objection', 'Developing', 'Learner uses a professional case to test the principle.'],
       ['Revision', 'Strong', 'Learner refines the original view after the dialogue.']
     ]
   },
@@ -36,7 +36,7 @@ const demos = {
     ],
     evidence: [
       ['Definition', 'Emerging', 'Learner begins with a hedonistic account.'],
-      ['Explanation', 'Developing', 'Learner distinguishes different senses of happiness.'],
+      ['Distinction', 'Developing', 'Learner distinguishes different senses of happiness.'],
       ['Counterexample', 'Strong', 'Learner uses a counterexample to test pleasure-only accounts.'],
       ['Revision', 'Strong', 'Learner revises the original claim in response to the counterexample.']
     ]

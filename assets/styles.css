@@ -88,3 +88,24 @@ p { line-height: 1.6; }
   .steps, .roadmap, .evidence-grid { grid-template-columns: 1fr; }
   .turn { grid-template-columns: 1fr; }
 }
+
+
+/* Understanding-through-dialogue patch */
+.understanding-flow {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  margin-top: 24px;
+}
+.understanding-flow div {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 18px;
+  box-shadow: 0 12px 26px rgba(23,56,75,.06);
+}
+.understanding-flow strong { display: block; margin-bottom: 6px; font-size: 18px; }
+.understanding-flow span { color: var(--muted); font-size: 14px; line-height: 1.45; }
+@media (max-width: 860px) {
+  .understanding-flow { grid-template-columns: 1fr; }
+}

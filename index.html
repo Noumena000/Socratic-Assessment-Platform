@@ -4,8 +4,8 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>Socratic Assessment Platform | Research Prototype</title>
-<meta content="A public-facing concept showcase for the Socratic Assessment Engine: an AI-assisted formative assessment research prototype." name="description"/>
+<title>Socratic Assessment Platform | Understanding Through Dialogue</title>
+<meta content="A public-facing showcase for a Socratic assessment prototype that helps instructors gather evidence of conceptual understanding through structured dialogue." name="description"/>
 <link href="assets/styles.css" rel="stylesheet"/>
 </head>
 <body>
@@ -13,7 +13,7 @@
 <nav class="nav">
 <a class="brand" href="#top">Socratic Assessment Platform</a>
 <div class="nav-links">
-<a href="#problem">Problem</a>
+<a href="#problem">Problem</a><a href="#understanding">Understanding</a>
 <a href="#demo">Demo</a>
 <a href="#workflow">Workflow</a>
 <a href="#privacy">Privacy</a>
@@ -25,25 +25,25 @@
 <section class="hero">
 <div class="hero-copy">
 <p class="eyebrow">Research prototype · AI-assisted formative assessment · Faculty-centered</p>
-<h1>Helping instructors understand how students think—not simply whether they reached the correct answer.</h1>
-<p class="lead">The Socratic Assessment Platform is a research prototype exploring how AI-assisted Socratic dialogue can help instructors observe reasoning, conceptual understanding, and intellectual growth while preserving faculty judgment.</p>
+<h1>Make understanding demonstrable through dialogue.</h1>
+<p class="lead">The Socratic Assessment Platform explores whether learners can demonstrate conceptual understanding by defining ideas, explaining reasons, applying concepts to new cases, answering objections, and revising their claims under questioning.</p>
 <div class="hero-actions">
 <a class="button primary" href="#demo">Explore the Research Prototype</a>
 <a class="button secondary" href="#privacy">See privacy posture</a>
 </div>
-<p class="status-note">This public showcase is intentionally limited. It does not expose the private reasoning engine, prompt architecture, API keys, learner records, or production implementation.</p>
+<p class="status-note">This public showcase is intentionally limited. It demonstrates the educational vision without exposing the private reasoning engine, prompt architecture, API keys, learner records, or production implementation.</p>
 </div>
 <div aria-label="Prototype interface preview" class="hero-panel">
 <div class="window-dots"><span></span><span></span><span></span></div>
 <div class="mock-card active">
-<span class="pill">Dialogue move</span>
-<h2>Clarify the claim</h2>
-<p>“What do you mean by duty here: rule-following, intention, obligation, or respect for persons?”</p>
+<span class="pill">Socratic move</span>
+<h2>Test understanding</h2>
+<p>“You have stated the answer. Now explain why that concept applies, what would challenge it, and how your view should be revised.”</p>
 </div>
 <div class="mock-grid">
 <div><strong>Definition</strong><span>Developing</span></div>
-<div><strong>Reason</strong><span>Strong</span></div>
-<div><strong>Counterexample</strong><span>Developing</span></div>
+<div><strong>Application</strong><span>Strong</span></div>
+<div><strong>Objection</strong><span>Developing</span></div>
 <div><strong>Revision</strong><span>Strong</span></div>
 </div>
 </div>
@@ -51,18 +51,33 @@
 <section class="section two-col" id="problem">
 <div>
 <p class="eyebrow">The instructional problem</p>
-<h2>Traditional assessment often captures conclusions more clearly than reasoning.</h2>
+<h2>AI-written work makes it harder to infer understanding from finished answers alone.</h2>
 </div>
 <div class="card stack">
-<p>Many student submissions show what a learner concluded, but not how the learner handled ambiguity, objections, evidence, conceptual distinctions, or revision.</p>
-<p>This prototype explores whether structured AI-assisted dialogue can produce formative evidence of understanding while keeping instructors in control of instructional decisions.</p>
+<p>Students can now arrive with polished essays, quiz answers, or discussion posts without necessarily being able to explain the concepts behind them.</p>
+<p>This prototype does not try to “detect AI.” It creates a setting where understanding must survive questioning: definition, distinction, application, objection, and revision.</p>
 </div>
 </section>
+<section class="section" id="understanding">
+<div class="section-heading">
+<p class="eyebrow">Understanding through dialogue</p>
+<h2>Copy-paste is insufficient when a learner must reason in real time.</h2>
+<p>The platform treats a prepared answer as the beginning of assessment, not the end. A learner demonstrates understanding only when they can explain the claim, connect it to course concepts, respond to pressure, and revise thoughtfully.</p>
+</div>
+<div class="understanding-flow">
+<div><strong>Claim</strong><span>What is the learner saying?</span></div>
+<div><strong>Examination</strong><span>What remains unclear?</span></div>
+<div><strong>Challenge</strong><span>What objection or case tests the claim?</span></div>
+<div><strong>Revision</strong><span>Can the learner improve the answer?</span></div>
+<div><strong>Evidence</strong><span>What can the instructor review?</span></div>
+</div>
+</section>
+
 <section class="section" id="demo">
 <div class="section-heading">
 <p class="eyebrow">Safe public demo</p>
-<h2>Fictional sample dialogue and formative evidence report</h2>
-<p>No student data is used. The demo below is a static institutional showcase, suitable for meetings and early feedback conversations.</p>
+<h2>Fictional dialogue showing how understanding is examined</h2>
+<p>No student data is used. The demo illustrates how an answer is pressed through clarification, application, objection, and revision.</p>
 </div>
 <div class="demo-layout">
 <aside aria-label="Sample transcript selector" class="demo-tabs">
@@ -76,11 +91,11 @@
 <h3 id="demoTitle">Kantian Trolley Dialogue</h3>
 <p id="demoSubtitle">A fictional learner clarifies duty, consequences, and persons as ends.</p>
 </div>
-<span class="badge">Research Prototype</span>
+<span class="badge">Understanding demo</span>
 </div>
 <div class="transcript" id="transcript"></div>
 <div class="evidence-block">
-<h4>Evidence of understanding</h4>
+<h4>Evidence of understanding for instructor review</h4>
 <div class="evidence-grid" id="evidence"></div>
 </div>
 </article>
@@ -89,13 +104,13 @@
 <section class="section" id="workflow">
 <div class="section-heading">
 <p class="eyebrow">How it would work</p>
-<h2>Designed around the assessment lifecycle</h2>
+<h2>Designed around claim, examination, and evidence</h2>
 </div>
 <div class="steps">
-<div class="step"><span>1</span><h3>Create</h3><p>Instructor selects the concept, learning goal, and Socratic moves.</p></div>
-<div class="step"><span>2</span><h3>Dialogue</h3><p>Learner is prompted to clarify, reason, test, and revise.</p></div>
-<div class="step"><span>3</span><h3>Review</h3><p>System drafts formative evidence for faculty review.</p></div>
-<div class="step"><span>4</span><h3>Export</h3><p>Instructor exports feedback or uses the report for targeted teaching.</p></div>
+<div class="step"><span>1</span><h3>Select</h3><p>Instructor chooses the concept, learning objective, and assessment focus.</p></div>
+<div class="step"><span>2</span><h3>Examine</h3><p>Learner explains, distinguishes, applies, and defends the claim.</p></div>
+<div class="step"><span>3</span><h3>Probe</h3><p>The platform asks targeted follow-ups where evidence is still missing.</p></div>
+<div class="step"><span>4</span><h3>Review</h3><p>Instructor reviews qualitative evidence of understanding, not an automatic grade.</p></div>
 </div>
 </section><section class="section">
 <div class="section-heading">
@@ -112,7 +127,7 @@
 <section class="section two-col dark-panel" id="privacy">
 <div>
 <p class="eyebrow">Privacy and governance</p>
-<h2>Built for a cautious institutional conversation.</h2>
+<h2>Built for faculty oversight and cautious institutional review.</h2>
 </div>
 <div class="privacy-list">
 <p><strong>Public showcase:</strong> static, fictional, and non-operational.</p>
@@ -123,13 +138,13 @@
 <section class="section" id="roadmap">
 <div class="section-heading">
 <p class="eyebrow">Roadmap</p>
-<h2>From concept prototype to controlled pilot</h2>
+<h2>From public showcase to faculty-reviewed pilot</h2>
 </div>
 <div class="roadmap">
-<div><h3>Phase A</h3><p>Static showcase and fictional examples for feedback.</p></div>
-<div><h3>Phase B</h3><p>Secure live LLM prototype with no real student records.</p></div>
-<div><h3>Phase C</h3><p>Faculty-reviewed formative reports and rubric alignment.</p></div>
-<div><h3>Phase D</h3><p>Institutional pilot after privacy, accessibility, and governance review.</p></div>
+<div><h3>Research</h3><p>Public concept showcase and fictional examples for feedback.</p></div>
+<div><h3>Prototype</h3><p>Secure live dialogue prototype using synthetic or volunteer test data only.</p></div>
+<div><h3>Faculty Review</h3><p>Instructor-facing reports, rubric alignment, and accessibility review.</p></div>
+<div><h3>Pilot</h3><p>Controlled institutional pilot after privacy, governance, and data-retention approval.</p></div>
 </div>
 </section>
 <section class="section">
@@ -146,7 +161,7 @@
 </ul>
 </section><section class="section meeting-brief">
 <h2>Meeting framing</h2>
-<p>“I am not proposing deployment yet. I am looking for strategic feedback on whether this direction could support formative assessment, where the governance risks are, and what would be required before any institutional pilot.”</p>
+<p>“I am not proposing deployment yet. I am exploring whether structured dialogue can help faculty gather better evidence of student understanding, especially in an era when polished written answers may not reliably show what a learner can explain, defend, or revise.”</p>
 </section>
 </main>
 <footer class="footer">
