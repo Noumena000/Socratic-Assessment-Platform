@@ -1,217 +1,317 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>Socratic Assessment Platform | Understanding Through Dialogue</title>
-<meta content="A public-facing showcase for a Socratic assessment prototype that helps instructors gather evidence of conceptual understanding through structured dialogue." name="description"/>
-<link href="assets/styles.css" rel="stylesheet"/>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Socratic Assessment Platform | Understanding Through Dialogue</title>
+  <meta name="description" content="Socratic Assessment Platform is a public-facing assessment experience powered by a deeper Socratic reasoning architecture.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
-<header class="site-header">
-<nav class="nav">
-<a class="brand" href="#top">Socratic Assessment Platform</a>
-<div class="nav-links">
-<a href="#problem">Problem</a><a href="#understanding">Understanding</a>
-<a href="#demo">Demo</a>
-<a href="#ai-connection">AI Setup</a>
-<a href="#workflow">Workflow</a>
-<a href="#privacy">Privacy</a>
-<a href="#roadmap">Roadmap</a>
-</div>
-</nav>
-</header>
-<main id="top">
-<section class="hero">
-<div class="hero-copy">
-<p class="eyebrow">Research prototype · AI-assisted formative assessment · Faculty-centered</p>
-<h1>Make understanding demonstrable through dialogue.</h1>
-<p class="lead">The Socratic Assessment Platform explores whether learners can demonstrate conceptual understanding by defining ideas, explaining reasons, applying concepts to new cases, answering objections, and revising their claims under questioning.</p>
-<div class="hero-actions">
-<a class="button primary" href="#demo">Explore the Research Prototype</a>
-<a class="button secondary" href="#privacy">See privacy posture</a>
-</div>
-<p class="status-note">This public showcase is intentionally limited. It demonstrates the educational vision without exposing the private reasoning engine, prompt architecture, API keys, learner records, or production implementation.</p>
-</div>
-<div aria-label="Prototype interface preview" class="hero-panel">
-<div class="window-dots"><span></span><span></span><span></span></div>
-<div class="mock-card active">
-<span class="pill">Socratic move</span>
-<h2>Test understanding</h2>
-<p>“You have stated the answer. Now explain why that concept applies, what would challenge it, and how your view should be revised.”</p>
-</div>
-<div class="mock-grid">
-<div><strong>Definition</strong><span>Developing</span></div>
-<div><strong>Application</strong><span>Strong</span></div>
-<div><strong>Objection</strong><span>Developing</span></div>
-<div><strong>Revision</strong><span>Strong</span></div>
-</div>
-</div>
-</section>
-<section class="section two-col" id="problem">
-<div>
-<p class="eyebrow">The instructional problem</p>
-<h2>AI-written work makes it harder to infer understanding from finished answers alone.</h2>
-</div>
-<div class="card stack">
-<p>Students can now arrive with polished essays, quiz answers, or discussion posts without necessarily being able to explain the concepts behind them.</p>
-<p>This prototype does not try to “detect AI.” It creates a setting where understanding must survive questioning: definition, distinction, application, objection, and revision.</p>
-</div>
-</section>
-<section class="section" id="understanding">
-<div class="section-heading">
-<p class="eyebrow">Understanding through dialogue</p>
-<h2>Copy-paste is insufficient when a learner must reason in real time.</h2>
-<p>The platform treats a prepared answer as the beginning of assessment, not the end. A learner demonstrates understanding only when they can explain the claim, connect it to course concepts, respond to pressure, and revise thoughtfully.</p>
-</div>
-<div class="understanding-flow">
-<div><strong>Claim</strong><span>What is the learner saying?</span></div>
-<div><strong>Examination</strong><span>What remains unclear?</span></div>
-<div><strong>Challenge</strong><span>What objection or case tests the claim?</span></div>
-<div><strong>Revision</strong><span>Can the learner improve the answer?</span></div>
-<div><strong>Evidence</strong><span>What can the instructor review?</span></div>
-</div>
-</section>
+  <header class="site-header">
+    <nav class="nav">
+      <a class="brand" href="#top">
+        <span class="brand-mark">SAP</span>
+        <span>Socratic Assessment Platform</span>
+      </a>
+      <div class="nav-links">
+        <a href="#problem">Problem</a>
+        <a href="#capabilities">What It Does</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#demo">Demo</a>
+        <a href="#dashboard">Instructor Review</a>
+        <a href="#privacy">Faculty Control</a>
+        <a href="#roadmap">Roadmap</a>
+      </div>
+    </nav>
+  </header>
 
-<section class="section" id="demo">
-<div class="section-heading">
-<p class="eyebrow">Safe public demo</p>
-<h2>Fictional dialogue showing how understanding is examined</h2>
-<p>No student data is used. The demo illustrates how an answer is pressed through clarification, application, objection, and revision.</p>
-</div>
-<div class="demo-layout">
-<aside aria-label="Sample transcript selector" class="demo-tabs">
-<button class="tab active" data-demo="kant">Kantian Trolley Dialogue</button>
-<button class="tab" data-demo="machine">Experience Machine Dialogue</button>
-</aside>
-<article class="demo-screen">
-<div class="demo-header">
-<div>
-<p class="eyebrow" id="moduleTitle">HUM301 · Kantianism and the Trolley Problem</p>
-<h3 id="demoTitle">Kantian Trolley Dialogue</h3>
-<p id="demoSubtitle">A fictional learner clarifies duty, consequences, and persons as ends.</p>
-</div>
-<span class="badge">Understanding demo</span>
-</div>
-<div class="transcript" id="transcript"></div>
-<div class="evidence-block">
-<h4>Evidence of understanding for instructor review</h4>
-<div class="evidence-grid" id="evidence"></div>
-</div>
-</article>
-</div>
-</section>
+  <main id="top">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Public assessment layer · Faculty-centered · Institutionally credible</p>
+        <h1>Understanding becomes demonstrable through dialogue.</h1>
+        <p class="lead">Socratic Assessment Platform is a public-facing assessment experience powered by a deeper Socratic reasoning architecture.</p>
+        <p class="hero-detail">It is not an AI chatbot and it is not an AI detector. It is an assessment interface built around dialogue, evidence, learner reasoning, and instructor judgment.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#demo">See the dialogue flow</a>
+          <a class="button secondary" href="#privacy">Read the faculty-control model</a>
+        </div>
+        <p class="status-note">The public site presents the assessment experience and review model while keeping private implementation details, prompts, internal logic, and sensitive architecture out of view.</p>
+      </div>
 
-<section class="section" id="ai-connection">
-<div class="section-heading">
-<p class="eyebrow">Optional live prototype connection</p>
-<h2>Connect a local or cloud reasoning provider for private testing.</h2>
-<p>This public showcase can include a safe, modular connection panel. It does not ship with an API key and does not store learner records. For real deployment, provider access should move behind an institutionally approved backend.</p>
-</div>
-<div class="connection-layout">
-<div class="connection-card">
-<h3>Reasoning Provider</h3>
-<label for="providerSelect">Provider</label>
-<select id="providerSelect">
-<option value="lmstudio">LM Studio / local OpenAI-compatible server</option>
-<option value="ollama">Ollama / local OpenAI-compatible server</option>
-<option value="mistral">Mistral Cloud</option>
-<option value="openai">OpenAI-compatible cloud endpoint</option>
-<option value="custom">Custom OpenAI-compatible endpoint</option>
-</select>
-<label for="endpointInput">Endpoint</label>
-<input id="endpointInput" value="http://127.0.0.1:1234/v1/chat/completions" />
-<label for="modelInput">Model</label>
-<input id="modelInput" value="local-model" />
-<label for="apiKeyInput">API key</label>
-<input id="apiKeyInput" type="password" autocomplete="off" placeholder="Optional for LM Studio; required for most cloud providers" />
-<label class="checkline"><input id="rememberConnection" type="checkbox" /> Remember these settings on this device</label>
-<div class="connection-actions">
-<button class="button primary" id="testConnectionBtn" type="button">Test Connection</button>
-<button class="button secondary" id="clearConnectionBtn" type="button">Clear</button>
-</div>
-<p class="connection-status" id="connectionStatus">Not connected. Use local testing for LM Studio before connecting any student-facing workflow.</p>
-</div>
-<div class="connection-card guidance">
-<h3>Recommended LM Studio settings</h3>
-<ol>
-<li>Open LM Studio and start the local server.</li>
-<li>Use an OpenAI-compatible chat completions endpoint.</li>
-<li>Keep the endpoint as <code>http://127.0.0.1:1234/v1/chat/completions</code> unless LM Studio shows a different port.</li>
-<li>Enter the loaded model name, or use <code>local-model</code> for quick testing.</li>
-<li>Click <strong>Test Connection</strong>. If the browser blocks the call, test locally with the private reasoning platform instead of GitHub Pages.</li>
-</ol>
-<p><strong>Public-repo safety:</strong> never commit API keys. This panel stores values only in the current browser when the checkbox is selected.</p>
-</div>
-</div>
-</section>
-<section class="section" id="workflow">
-<div class="section-heading">
-<p class="eyebrow">How it would work</p>
-<h2>Designed around claim, examination, and evidence</h2>
-</div>
-<div class="steps">
-<div class="step"><span>1</span><h3>Select</h3><p>Instructor chooses the concept, learning objective, and assessment focus.</p></div>
-<div class="step"><span>2</span><h3>Examine</h3><p>Learner explains, distinguishes, applies, and defends the claim.</p></div>
-<div class="step"><span>3</span><h3>Probe</h3><p>The platform asks targeted follow-ups where evidence is still missing.</p></div>
-<div class="step"><span>4</span><h3>Review</h3><p>Instructor reviews qualitative evidence of understanding, not an automatic grade.</p></div>
-</div>
-</section><section class="section">
-<div class="section-heading">
-<p class="eyebrow">Educational Foundations</p>
-<h2>Grounded in established teaching and learning research</h2>
-</div>
-<div class="steps">
-<div class="step"><h3>Socratic Dialogue</h3><p>Clarification through questioning.</p></div>
-<div class="step"><h3>Formative Assessment</h3><p>Evidence to guide instruction.</p></div>
-<div class="step"><h3>Metacognition</h3><p>Encouraging learners to examine their own reasoning.</p></div>
-<div class="step"><h3>Retrieval &amp; Reflection</h3><p>Building durable understanding through explanation and revision.</p></div>
-</div>
-</section>
-<section class="section two-col dark-panel" id="privacy">
-<div>
-<p class="eyebrow">Privacy and governance</p>
-<h2>Built for faculty oversight and cautious institutional review.</h2>
-</div>
-<div class="privacy-list">
-<p><strong>Public showcase:</strong> static, fictional, and non-operational.</p>
-<p><strong>Private development:</strong> reasoning engine, scoring logic, prompt architecture, and API integration remain private.</p>
-<p><strong>Production requirement:</strong> institutionally approved AI provider, secure backend, FERPA-aware data handling, retention rules, accessibility review, and faculty oversight.</p>
-</div>
-</section>
-<section class="section" id="roadmap">
-<div class="section-heading">
-<p class="eyebrow">Roadmap</p>
-<h2>From public showcase to faculty-reviewed pilot</h2>
-</div>
-<div class="roadmap">
-<div><h3>Research</h3><p>Public concept showcase and fictional examples for feedback.</p></div>
-<div><h3>Prototype</h3><p>Secure live dialogue prototype using synthetic or volunteer test data only.</p></div>
-<div><h3>Faculty Review</h3><p>Instructor-facing reports, rubric alignment, and accessibility review.</p></div>
-<div><h3>Pilot</h3><p>Controlled institutional pilot after privacy, governance, and data-retention approval.</p></div>
-</div>
-</section>
-<section class="section">
-<div class="section-heading">
-<p class="eyebrow">Design Principles</p>
-<h2>Five principles guide the platform</h2>
-</div>
-<ul>
-<li>AI supports faculty—it does not replace faculty.</li>
-<li>Assessment should examine reasoning, not only answers.</li>
-<li>Student privacy comes before automation.</li>
-<li>Transparency matters more than prediction.</li>
-<li>Human judgment remains central.</li>
-</ul>
-</section><section class="section meeting-brief">
-<h2>Meeting framing</h2>
-<p>“I am not proposing deployment yet. I am exploring whether structured dialogue can help faculty gather better evidence of student understanding, especially in an era when polished written answers may not reliably show what a learner can explain, defend, or revise.”</p>
-</section>
-</main>
-<footer class="footer">
-<p>© 2026 Socratic Assessment Engine research prototype. Public showcase only.</p>
-</footer>
-<script src="assets/app.js"></script>
+      <div class="hero-panel" aria-label="Assessment architecture preview">
+        <div class="window-dots"><span></span><span></span><span></span></div>
+        <div class="hero-stack">
+          <article class="hero-card spotlight">
+            <span class="pill">Assessment view</span>
+            <h2>Dialogue creates visible evidence.</h2>
+            <p>Learners clarify, justify, revise, and apply ideas while the platform gathers structured evidence for instructor review.</p>
+          </article>
+          <div class="hero-mini-grid">
+            <article class="hero-mini-card">
+              <strong>Reasoning Events</strong>
+              <span>Claims, revisions, justifications, applications</span>
+            </article>
+            <article class="hero-mini-card">
+              <strong>Evidence Updates</strong>
+              <span>Understanding map, misconceptions, follow-up needs</span>
+            </article>
+            <article class="hero-mini-card">
+              <strong>Decision Snapshot</strong>
+              <span>A review-ready summary for instructor judgment</span>
+            </article>
+            <article class="hero-mini-card">
+              <strong>Faculty Oversight</strong>
+              <span>Human evaluation remains central at every stage</span>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section two-col" id="problem">
+      <div>
+        <p class="eyebrow">The problem</p>
+        <h2>Finished answers alone no longer tell instructors enough about understanding.</h2>
+      </div>
+      <div class="card stack">
+        <p>Polished responses can hide whether a learner can actually explain a concept, defend it under pressure, apply it in a new case, or revise it when challenged.</p>
+        <p>Socratic Assessment does not try to detect AI use. It creates an assessment setting where understanding must become visible through dialogue and where instructors can review evidence rather than rely on surface fluency.</p>
+      </div>
+    </section>
+
+    <section class="section" id="capabilities">
+      <div class="section-heading">
+        <p class="eyebrow">What Socratic Assessment Does</p>
+        <h2>Assessment is treated as an evidence-building process, not simple answer checking.</h2>
+        <p>The platform helps instructors see how a learner defines terms, connects ideas, responds to questions, revises a claim, and supports it with reasons. The result is a structured record that can inform human judgment.</p>
+      </div>
+      <div class="capability-grid">
+        <article class="feature-card">
+          <h3>Dialogue-Guided Assessment</h3>
+          <p>Questioning moves the learner beyond a prepared answer and into explanation, distinction, application, and revision.</p>
+        </article>
+        <article class="feature-card">
+          <h3>Evidence Accumulation</h3>
+          <p>Each turn can add support, reveal uncertainty, or expose misconceptions that matter for review.</p>
+        </article>
+        <article class="feature-card">
+          <h3>Reasoning Visibility</h3>
+          <p>The interface highlights how an answer changes over time rather than treating the first response as final.</p>
+        </article>
+        <article class="feature-card">
+          <h3>Instructor Judgment</h3>
+          <p>The system prepares a decision snapshot for faculty. It does not replace evaluation, and it does not automatically grade learners.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="how-it-works">
+      <div class="section-heading">
+        <p class="eyebrow">How the Reasoning Architecture Works</p>
+        <h2>A visible assessment workflow backed by a deeper reasoning process.</h2>
+        <p>The public experience reflects a structured pipeline that moves from course-specific context to instructor review while keeping the private implementation safely behind the scenes.</p>
+      </div>
+      <div class="pipeline" aria-label="Assessment pipeline">
+        <div class="pipeline-step">
+          <span class="pipeline-index">1</span>
+          <strong>Knowledge Pack</strong>
+          <p>Course concepts, goals, and assessment focus establish the context.</p>
+        </div>
+        <div class="pipeline-arrow" aria-hidden="true">→</div>
+        <div class="pipeline-step">
+          <span class="pipeline-index">2</span>
+          <strong>Dialogue</strong>
+          <p>The learner enters a guided exchange shaped by pedagogical questioning.</p>
+        </div>
+        <div class="pipeline-arrow" aria-hidden="true">→</div>
+        <div class="pipeline-step">
+          <span class="pipeline-index">3</span>
+          <strong>Learner Response</strong>
+          <p>A claim, explanation, or revision becomes available for examination.</p>
+        </div>
+        <div class="pipeline-arrow" aria-hidden="true">→</div>
+        <div class="pipeline-step">
+          <span class="pipeline-index">4</span>
+          <strong>Reasoning Event</strong>
+          <p>The interaction is interpreted as evidence of understanding, uncertainty, or misconception.</p>
+        </div>
+        <div class="pipeline-arrow" aria-hidden="true">→</div>
+        <div class="pipeline-step">
+          <span class="pipeline-index">5</span>
+          <strong>Evidence Update</strong>
+          <p>The learner’s visible evidence record is updated across key dimensions.</p>
+        </div>
+        <div class="pipeline-arrow" aria-hidden="true">→</div>
+        <div class="pipeline-step">
+          <span class="pipeline-index">6</span>
+          <strong>Decision Snapshot</strong>
+          <p>A concise summary is prepared for academic review and follow-up.</p>
+        </div>
+        <div class="pipeline-arrow" aria-hidden="true">→</div>
+        <div class="pipeline-step">
+          <span class="pipeline-index">7</span>
+          <strong>Instructor Review</strong>
+          <p>Faculty interpret the evidence, make judgments, and decide next steps.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="demo">
+      <div class="section-heading">
+        <p class="eyebrow">Live Dialogue Demo</p>
+        <h2>A public-safe demonstration of how dialogue, evidence, and review fit together.</h2>
+        <p>This fictional demo shows a learner making a claim, receiving a follow-up, revising the answer, triggering an evidence update, and generating an instructor-facing summary.</p>
+      </div>
+      <div class="demo-shell">
+        <div class="demo-controls" aria-label="Sample dialogue selector">
+          <button class="tab active" data-demo="equity" type="button">Equity Dialogue</button>
+          <button class="tab" data-demo="ethics" type="button">Ethics Dialogue</button>
+        </div>
+        <div class="demo-stage">
+          <article class="dialogue-panel">
+            <div class="demo-header">
+              <div>
+                <p class="eyebrow" id="moduleTitle">EDU 410 · Equity and Schooling</p>
+                <h3 id="demoTitle">Claim to revision</h3>
+                <p id="demoSubtitle">A learner moves from a broad claim toward a more defensible explanation.</p>
+              </div>
+              <span class="badge">Simulated assessment</span>
+            </div>
+            <div class="demo-timeline" id="timeline"></div>
+            <div class="demo-actions">
+              <button class="button primary small" id="playDemoBtn" type="button">Play sequence</button>
+              <button class="button secondary small" id="resetDemoBtn" type="button">Reset</button>
+            </div>
+          </article>
+
+          <aside class="evidence-panel">
+            <section class="evidence-card">
+              <div class="panel-heading">
+                <h4>Evidence Panel</h4>
+                <span class="live-dot">Updating</span>
+              </div>
+              <div class="evidence-list" id="evidenceList"></div>
+            </section>
+            <section class="summary-card">
+              <div class="panel-heading">
+                <h4>Instructor Summary</h4>
+                <span class="summary-status" id="summaryStatus">Waiting for sequence</span>
+              </div>
+              <p id="instructorSummary">The instructor summary appears after the learner revises the answer and the evidence record is updated.</p>
+            </section>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="dashboard">
+      <div class="section-heading">
+        <p class="eyebrow">Instructor Review / Dashboard</p>
+        <h2>A review surface built for faculty and academic decision-makers.</h2>
+        <p>The assessment layer becomes useful when instructors can quickly inspect what the dialogue revealed, where evidence is strong, where misunderstanding remains, and what follow-up would be most helpful.</p>
+      </div>
+      <div class="dashboard-grid">
+        <article class="dashboard-card accent">
+          <h3>Understanding Map</h3>
+          <p>Concept coverage across definition, application, justification, revision, and transfer.</p>
+        </article>
+        <article class="dashboard-card">
+          <h3>Evidence Collected</h3>
+          <p>Structured notes tied to claims, examples, revisions, and moments of uncertainty.</p>
+        </article>
+        <article class="dashboard-card">
+          <h3>Misconceptions Detected</h3>
+          <p>Patterns that suggest partial understanding, oversimplification, or conceptual confusion.</p>
+        </article>
+        <article class="dashboard-card">
+          <h3>Recommended Follow-up</h3>
+          <p>Suggested prompts, cases, or clarifying questions for the next instructional move.</p>
+        </article>
+        <article class="dashboard-card">
+          <h3>Decision Snapshot</h3>
+          <p>A concise faculty-facing snapshot of what the learner has and has not demonstrated.</p>
+        </article>
+        <article class="dashboard-card">
+          <h3>Instructor Review</h3>
+          <p>The final interpretive layer where human judgment, course expectations, and context remain central.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section two-col faculty-panel" id="privacy">
+      <div>
+        <p class="eyebrow">Privacy + Faculty Control</p>
+        <h2>Evidence supports instructor judgment. It does not replace it.</h2>
+      </div>
+      <div class="policy-list">
+        <p><strong>Faculty remain responsible for evaluation.</strong> The platform is designed to support instructor judgment, not automate it away.</p>
+        <p><strong>No automatic grading claim.</strong> The public assessment experience does not present machine-generated scores as final academic decisions.</p>
+        <p><strong>Evidence over verdicts.</strong> Dialogue produces reviewable evidence intended to help instructors make better assessment decisions.</p>
+        <p><strong>Institutional caution.</strong> Any real deployment would require approved governance, secure data handling, accessibility review, and faculty oversight.</p>
+      </div>
+    </section>
+
+    <section class="section reasoning-panel" id="reasoning-platform">
+      <div class="section-heading">
+        <p class="eyebrow">Powered by the Reasoning Platform</p>
+        <h2>The public assessment experience reflects a deeper reasoning architecture.</h2>
+        <p>The public assessment experience reflects the same architecture used in the private Socratic Reasoning Platform: learner state, reasoning events, pedagogical moves, evidence accumulation, and decision snapshots.</p>
+      </div>
+      <div class="reasoning-grid">
+        <article class="reasoning-card">
+          <h3>Learner State</h3>
+          <p>Visible assessment adapts to what the learner appears to understand, misunderstand, or still need to explain.</p>
+        </article>
+        <article class="reasoning-card">
+          <h3>Pedagogical Moves</h3>
+          <p>Questioning remains purposeful and assessment-oriented rather than conversational for its own sake.</p>
+        </article>
+        <article class="reasoning-card">
+          <h3>Decision Snapshots</h3>
+          <p>Review outputs are shaped for instructor interpretation without exposing private prompts, code, or proprietary logic.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="roadmap">
+      <div class="section-heading">
+        <p class="eyebrow">Roadmap</p>
+        <h2>From public assessment layer to faculty-reviewed institutional pilot.</h2>
+      </div>
+      <div class="roadmap">
+        <article class="roadmap-card">
+          <span>01</span>
+          <h3>Public Assessment Layer</h3>
+          <p>Clarify the dialogue-centered assessment model and show how evidence reaches instructors.</p>
+        </article>
+        <article class="roadmap-card">
+          <span>02</span>
+          <h3>Faculty Feedback</h3>
+          <p>Gather review from instructors, administrators, and educational technology stakeholders.</p>
+        </article>
+        <article class="roadmap-card">
+          <span>03</span>
+          <h3>Secure Pilot Design</h3>
+          <p>Align data handling, accessibility, governance, and institutional requirements before any pilot.</p>
+        </article>
+        <article class="roadmap-card">
+          <span>04</span>
+          <h3>Instructor-Guided Pilot</h3>
+          <p>Test the assessment workflow in a controlled setting where human evaluation remains central.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© 2026 Socratic Assessment Platform. Public-facing assessment experience only.</p>
+  </footer>
+
+  <script src="assets/app.js"></script>
 </body>
 </html>
