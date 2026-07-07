@@ -15,6 +15,7 @@
 <div class="nav-links">
 <a href="#problem">Problem</a><a href="#understanding">Understanding</a>
 <a href="#demo">Demo</a>
+<a href="#ai-connection">AI Setup</a>
 <a href="#workflow">Workflow</a>
 <a href="#privacy">Privacy</a>
 <a href="#roadmap">Roadmap</a>
@@ -99,6 +100,50 @@
 <div class="evidence-grid" id="evidence"></div>
 </div>
 </article>
+</div>
+</section>
+
+<section class="section" id="ai-connection">
+<div class="section-heading">
+<p class="eyebrow">Optional live prototype connection</p>
+<h2>Connect a local or cloud reasoning provider for private testing.</h2>
+<p>This public showcase can include a safe, modular connection panel. It does not ship with an API key and does not store learner records. For real deployment, provider access should move behind an institutionally approved backend.</p>
+</div>
+<div class="connection-layout">
+<div class="connection-card">
+<h3>Reasoning Provider</h3>
+<label for="providerSelect">Provider</label>
+<select id="providerSelect">
+<option value="lmstudio">LM Studio / local OpenAI-compatible server</option>
+<option value="ollama">Ollama / local OpenAI-compatible server</option>
+<option value="mistral">Mistral Cloud</option>
+<option value="openai">OpenAI-compatible cloud endpoint</option>
+<option value="custom">Custom OpenAI-compatible endpoint</option>
+</select>
+<label for="endpointInput">Endpoint</label>
+<input id="endpointInput" value="http://127.0.0.1:1234/v1/chat/completions" />
+<label for="modelInput">Model</label>
+<input id="modelInput" value="local-model" />
+<label for="apiKeyInput">API key</label>
+<input id="apiKeyInput" type="password" autocomplete="off" placeholder="Optional for LM Studio; required for most cloud providers" />
+<label class="checkline"><input id="rememberConnection" type="checkbox" /> Remember these settings on this device</label>
+<div class="connection-actions">
+<button class="button primary" id="testConnectionBtn" type="button">Test Connection</button>
+<button class="button secondary" id="clearConnectionBtn" type="button">Clear</button>
+</div>
+<p class="connection-status" id="connectionStatus">Not connected. Use local testing for LM Studio before connecting any student-facing workflow.</p>
+</div>
+<div class="connection-card guidance">
+<h3>Recommended LM Studio settings</h3>
+<ol>
+<li>Open LM Studio and start the local server.</li>
+<li>Use an OpenAI-compatible chat completions endpoint.</li>
+<li>Keep the endpoint as <code>http://127.0.0.1:1234/v1/chat/completions</code> unless LM Studio shows a different port.</li>
+<li>Enter the loaded model name, or use <code>local-model</code> for quick testing.</li>
+<li>Click <strong>Test Connection</strong>. If the browser blocks the call, test locally with the private reasoning platform instead of GitHub Pages.</li>
+</ol>
+<p><strong>Public-repo safety:</strong> never commit API keys. This panel stores values only in the current browser when the checkbox is selected.</p>
+</div>
 </div>
 </section>
 <section class="section" id="workflow">

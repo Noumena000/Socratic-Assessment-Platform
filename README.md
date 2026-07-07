@@ -30,6 +30,21 @@ The instructor remains the final evaluator. The platform produces evidence for r
 - Privacy and governance language
 - A roadmap for cautious institutional discussion
 
+
+## Optional AI Connection Panel
+
+The public showcase now includes a modular **Reasoning Provider** panel for private testing. It can point to:
+
+- LM Studio or another local OpenAI-compatible server
+- Ollama's OpenAI-compatible endpoint
+- Mistral Cloud
+- OpenAI-compatible cloud endpoints
+- a custom chat-completions endpoint
+
+No API key is included in the repository. Keys should never be committed. The panel can remember settings only in the current browser's local storage when the user explicitly checks the remember option.
+
+For production, provider calls should move behind a secure, institutionally approved backend rather than being made directly from a public static page.
+
 ## What this public site intentionally omits
 
 - private reasoning-engine source code
