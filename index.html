@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%2317344b'/%3E%3Cpath d='M18 39c7 6 21 6 28-2M19 24h26M23 32h18' stroke='%23f4efe7' stroke-width='5' stroke-linecap='round' fill='none'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
@@ -33,14 +34,14 @@
     <section class="hero">
       <div class="hero-copy">
         <p class="eyebrow">Public assessment layer · Faculty-centered · Institutionally credible</p>
-        <h1>Understanding becomes demonstrable through dialogue.</h1>
-        <p class="lead">Socratic Assessment Platform is a public-facing assessment experience powered by a deeper Socratic reasoning architecture.</p>
-        <p class="hero-detail">It is not an AI chatbot and it is not an AI detector. It is an assessment interface built around dialogue, evidence, learner reasoning, and instructor judgment.</p>
+        <h1>Understanding becomes visible through dialogue.</h1>
+        <p class="lead">A public-facing assessment experience powered by a deeper Socratic reasoning architecture.</p>
+        <p class="hero-detail">Not a chatbot. Not an AI detector. A faculty-centered interface where learners explain, revise, apply, and make reasoning visible.</p>
         <div class="hero-actions">
           <a class="button primary" href="#demo">See the dialogue flow</a>
           <a class="button secondary" href="#privacy">Read the faculty-control model</a>
         </div>
-        <p class="status-note">The public site presents the assessment experience and review model while keeping private implementation details, prompts, internal logic, and sensitive architecture out of view.</p>
+        <p class="status-note">Public demo only: assessment layer visible, private implementation details protected.</p>
       </div>
 
       <div class="hero-panel" aria-label="Assessment architecture preview">
@@ -81,6 +82,88 @@
       <div class="card stack">
         <p>Polished responses can hide whether a learner can actually explain a concept, defend it under pressure, apply it in a new case, or revise it when challenged.</p>
         <p>Socratic Assessment does not try to detect AI use. It creates an assessment setting where understanding must become visible through dialogue and where instructors can review evidence rather than rely on surface fluency.</p>
+      </div>
+    </section>
+
+    <section class="section demo-section" id="demo">
+      <div class="section-heading centered">
+        <p class="eyebrow">Live Dialogue Demo</p>
+        <h2>Watch evidence build as the learner explains, revises, and applies an idea.</h2>
+        <p>The system is not automatically grading. It is accumulating reviewable evidence for instructor judgment.</p>
+      </div>
+      <div class="demo-shell">
+        <div class="demo-toolbar">
+          <div class="demo-controls" aria-label="Sample dialogue selector">
+            <button class="tab active" data-demo="equity" type="button">Equity Dialogue</button>
+            <button class="tab" data-demo="ethics" type="button">Ethics Dialogue</button>
+          </div>
+          <div class="demo-actions">
+            <button class="button primary small" id="playDemoBtn" type="button">Play sequence</button>
+            <button class="button secondary small" id="resetDemoBtn" type="button">Reset</button>
+          </div>
+        </div>
+        <div class="demo-stage">
+          <article class="dialogue-panel" aria-label="Simulated assessment dialogue">
+            <div class="demo-header">
+              <div>
+                <p class="eyebrow" id="moduleTitle">EDU 410 · Equity and Schooling</p>
+                <h3 id="demoTitle">Claim to revision</h3>
+                <p id="demoSubtitle">A learner moves from a broad claim toward a more defensible explanation.</p>
+              </div>
+              <span class="badge">Simulated assessment</span>
+            </div>
+            <div class="chat-window" id="timeline"></div>
+          </article>
+
+          <aside class="evidence-panel" aria-label="Evidence accumulation panel">
+            <section class="evidence-card">
+              <div class="panel-heading">
+                <div>
+                  <h4>Evidence Accumulation</h4>
+                  <p>Reviewable evidence, not an automatic grade.</p>
+                </div>
+                <span class="live-dot" id="evidenceStatus">Ready</span>
+              </div>
+              <div class="evidence-list" id="evidenceList"></div>
+            </section>
+            <section class="summary-card">
+              <div class="panel-heading">
+                <h4>Instructor Summary</h4>
+                <span class="summary-status" id="summaryStatus">Waiting</span>
+              </div>
+              <p id="instructorSummary">The instructor summary appears after the learner revises the answer and the evidence record is updated.</p>
+            </section>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section comparison-section" aria-labelledby="comparison-title">
+      <div class="comparison-card">
+        <div>
+          <p class="eyebrow">Why this exists</p>
+          <h2 id="comparison-title">Assessment should reveal reasoning, not just receive a final answer.</h2>
+        </div>
+        <div class="comparison-grid">
+          <article class="comparison-track traditional">
+            <h3>Traditional assessment</h3>
+            <div class="flow-line">
+              <span>Question</span>
+              <span>Finished answer</span>
+              <span>Grade</span>
+            </div>
+          </article>
+          <article class="comparison-track socratic">
+            <h3>Socratic assessment</h3>
+            <div class="flow-line">
+              <span>Question</span>
+              <span>Dialogue</span>
+              <span>Revision</span>
+              <span>Evidence</span>
+              <span>Instructor judgment</span>
+            </div>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -161,85 +244,50 @@
       </div>
     </section>
 
-    <section class="section" id="demo">
-      <div class="section-heading">
-        <p class="eyebrow">Live Dialogue Demo</p>
-        <h2>A public-safe demonstration of how dialogue, evidence, and review fit together.</h2>
-        <p>This fictional demo shows a learner making a claim, receiving a follow-up, revising the answer, triggering an evidence update, and generating an instructor-facing summary.</p>
-      </div>
-      <div class="demo-shell">
-        <div class="demo-controls" aria-label="Sample dialogue selector">
-          <button class="tab active" data-demo="equity" type="button">Equity Dialogue</button>
-          <button class="tab" data-demo="ethics" type="button">Ethics Dialogue</button>
-        </div>
-        <div class="demo-stage">
-          <article class="dialogue-panel">
-            <div class="demo-header">
-              <div>
-                <p class="eyebrow" id="moduleTitle">EDU 410 · Equity and Schooling</p>
-                <h3 id="demoTitle">Claim to revision</h3>
-                <p id="demoSubtitle">A learner moves from a broad claim toward a more defensible explanation.</p>
-              </div>
-              <span class="badge">Simulated assessment</span>
-            </div>
-            <div class="demo-timeline" id="timeline"></div>
-            <div class="demo-actions">
-              <button class="button primary small" id="playDemoBtn" type="button">Play sequence</button>
-              <button class="button secondary small" id="resetDemoBtn" type="button">Reset</button>
-            </div>
-          </article>
-
-          <aside class="evidence-panel">
-            <section class="evidence-card">
-              <div class="panel-heading">
-                <h4>Evidence Panel</h4>
-                <span class="live-dot">Updating</span>
-              </div>
-              <div class="evidence-list" id="evidenceList"></div>
-            </section>
-            <section class="summary-card">
-              <div class="panel-heading">
-                <h4>Instructor Summary</h4>
-                <span class="summary-status" id="summaryStatus">Waiting for sequence</span>
-              </div>
-              <p id="instructorSummary">The instructor summary appears after the learner revises the answer and the evidence record is updated.</p>
-            </section>
-          </aside>
-        </div>
-      </div>
-    </section>
-
     <section class="section" id="dashboard">
       <div class="section-heading">
         <p class="eyebrow">Instructor Review / Dashboard</p>
-        <h2>A review surface built for faculty and academic decision-makers.</h2>
-        <p>The assessment layer becomes useful when instructors can quickly inspect what the dialogue revealed, where evidence is strong, where misunderstanding remains, and what follow-up would be most helpful.</p>
+        <h2>A realistic faculty review surface, not an automated verdict.</h2>
+        <p>Instructors can inspect strengths, gaps, suggested follow-up, and a decision snapshot before making their own academic judgment.</p>
       </div>
-      <div class="dashboard-grid">
-        <article class="dashboard-card accent">
-          <h3>Understanding Map</h3>
-          <p>Concept coverage across definition, application, justification, revision, and transfer.</p>
-        </article>
-        <article class="dashboard-card">
-          <h3>Evidence Collected</h3>
-          <p>Structured notes tied to claims, examples, revisions, and moments of uncertainty.</p>
-        </article>
-        <article class="dashboard-card">
-          <h3>Misconceptions Detected</h3>
-          <p>Patterns that suggest partial understanding, oversimplification, or conceptual confusion.</p>
-        </article>
-        <article class="dashboard-card">
-          <h3>Recommended Follow-up</h3>
-          <p>Suggested prompts, cases, or clarifying questions for the next instructional move.</p>
-        </article>
-        <article class="dashboard-card">
-          <h3>Decision Snapshot</h3>
-          <p>A concise faculty-facing snapshot of what the learner has and has not demonstrated.</p>
-        </article>
-        <article class="dashboard-card">
-          <h3>Instructor Review</h3>
-          <p>The final interpretive layer where human judgment, course expectations, and context remain central.</p>
-        </article>
+      <div class="review-dashboard">
+        <header class="review-header">
+          <div>
+            <span class="dashboard-kicker">Sample Learner</span>
+            <h3>Assessment Topic: Equity and Schooling</h3>
+          </div>
+          <span class="review-status">Faculty review pending</span>
+        </header>
+        <div class="review-grid">
+          <article class="dashboard-card strengths">
+            <span class="card-label">Strengths</span>
+            <h3>Clear revision after questioning</h3>
+            <p>Distinguishes equality from equity and improves the original claim.</p>
+          </article>
+          <article class="dashboard-card evidence-needed">
+            <span class="card-label">Needs more evidence</span>
+            <h3>Application / transfer</h3>
+            <p>Ask for a classroom example or policy case to confirm transfer.</p>
+          </article>
+          <article class="dashboard-card follow-up">
+            <span class="card-label">Suggested follow-up</span>
+            <h3>Test the distinction</h3>
+            <p>“Give a case where equal treatment would still be unfair.”</p>
+          </article>
+          <article class="dashboard-card snapshot">
+            <span class="card-label">Decision snapshot</span>
+            <h3>Evidence supports developing understanding</h3>
+            <p>Instructor should review the dialogue record before recording any evaluation.</p>
+          </article>
+          <article class="dashboard-card review-wide">
+            <span class="card-label">Faculty review status</span>
+            <div class="review-checklist">
+              <span>Evidence collected</span>
+              <span>Follow-up recommended</span>
+              <span>Awaiting instructor judgment</span>
+            </div>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -251,6 +299,7 @@
       <div class="policy-list">
         <p><strong>Faculty remain responsible for evaluation.</strong> The platform is designed to support instructor judgment, not automate it away.</p>
         <p><strong>No automatic grading claim.</strong> The public assessment experience does not present machine-generated scores as final academic decisions.</p>
+        <p><strong>Not an AI detector.</strong> The platform examines reasoning through dialogue instead of making claims about authorship.</p>
         <p><strong>Evidence over verdicts.</strong> Dialogue produces reviewable evidence intended to help instructors make better assessment decisions.</p>
         <p><strong>Institutional caution.</strong> Any real deployment would require approved governance, secure data handling, accessibility review, and faculty oversight.</p>
       </div>
@@ -261,6 +310,7 @@
         <p class="eyebrow">Powered by the Reasoning Platform</p>
         <h2>The public assessment experience reflects a deeper reasoning architecture.</h2>
         <p>The public assessment experience reflects the same architecture used in the private Socratic Reasoning Platform: learner state, reasoning events, pedagogical moves, evidence accumulation, and decision snapshots.</p>
+        <p>This site demonstrates the public assessment layer while private code, prompts, internal logic, and sensitive implementation details remain protected.</p>
       </div>
       <div class="reasoning-grid">
         <article class="reasoning-card">
