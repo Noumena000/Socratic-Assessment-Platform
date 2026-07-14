@@ -1,38 +1,44 @@
+// ============================================
+// Socratic Assessment Platform - Main JavaScript
+// Public demo with original sequences + live dialogue
+// ============================================
+
+// Original Demo Data
 const demos = {
   equity: {
     moduleTitle: "EDU 410 · Equity and Schooling",
-    title: "Claim to revision",
+    title: "Claim to Revision",
     subtitle: "A learner moves from a broad claim toward a more defensible explanation.",
     sequence: [
       {
-        role: "Learner claim",
+        role: "Learner Claim",
         speakerClass: "learner",
         text: "Educational equity means giving every student the same resources, because equal treatment is the fairest approach."
       },
       {
-        role: "Socratic follow-up",
+        role: "Socratic Follow-Up",
         speakerClass: "system",
         text: "If students begin with different barriers or needs, does equal distribution always produce equitable opportunity? Clarify the difference between equality and equity."
       },
       {
-        role: "Learner revision",
+        role: "Learner Revision",
         speakerClass: "learner",
         text: "I need to revise that. Equality gives the same support to everyone, but equity may require different support so students can reach comparable opportunities and outcomes."
       },
       {
-        role: "Evidence update",
+        role: "Evidence Update",
         speakerClass: "summary",
         text: "Evidence record updated: learner distinguishes equality from equity and revises the original claim under questioning."
       },
       {
-        role: "Instructor summary",
+        role: "Instructor Summary",
         speakerClass: "summary",
         text: "Instructor receives a snapshot noting stronger conceptual distinction, successful revision, and a remaining need for a concrete classroom example."
       }
     ],
     evidence: [
       {
-        label: "Concept distinction",
+        label: "Concept Distinction",
         strength: "Improving",
         status: "improving",
         initialLevel: 25,
@@ -52,7 +58,7 @@ const demos = {
         updated: "Learner connects differentiated support to comparable opportunity."
       },
       {
-        label: "Revision quality",
+        label: "Revision Quality",
         strength: "Strong",
         status: "strong",
         initialLevel: 8,
@@ -62,8 +68,8 @@ const demos = {
         updated: "Learner revises the original position after targeted questioning."
       },
       {
-        label: "Application / transfer",
-        strength: "Needs evidence",
+        label: "Application / Transfer",
+        strength: "Needs Evidence",
         status: "watch",
         initialLevel: 12,
         updatedLevel: 42,
@@ -76,38 +82,38 @@ const demos = {
   },
   ethics: {
     moduleTitle: "PHI 220 · Ethics and Public Life",
-    title: "Reasoning under pressure",
+    title: "Reasoning Under Pressure",
     subtitle: "A learner clarifies a moral claim, answers a challenge, and refines the position.",
     sequence: [
       {
-        role: "Learner claim",
+        role: "Learner Claim",
         speakerClass: "learner",
         text: "Public officials should always tell the truth, because lying is what destroys trust."
       },
       {
-        role: "Socratic follow-up",
+        role: "Socratic Follow-Up",
         speakerClass: "system",
         text: "What about a case where full disclosure would create immediate harm? Explain whether your principle allows exceptions or whether the duty remains absolute."
       },
       {
-        role: "Learner revision",
+        role: "Learner Revision",
         speakerClass: "learner",
         text: "I would revise the claim. Truthfulness should be the default duty, but an official may need to withhold some information temporarily when disclosure would directly endanger people. That is different from deceptive manipulation."
       },
       {
-        role: "Evidence update",
+        role: "Evidence Update",
         speakerClass: "summary",
         text: "Evidence record updated: learner moved from an absolute claim to a qualified principle and introduced a relevant distinction."
       },
       {
-        role: "Instructor summary",
+        role: "Instructor Summary",
         speakerClass: "summary",
         text: "Instructor receives a snapshot noting stronger nuance, emerging policy reasoning, and a remaining follow-up about withholding versus deception."
       }
     ],
     evidence: [
       {
-        label: "Concept distinction",
+        label: "Concept Distinction",
         strength: "Improving",
         status: "improving",
         initialLevel: 30,
@@ -127,7 +133,7 @@ const demos = {
         updated: "Learner explains how duty and harm can come into tension."
       },
       {
-        label: "Revision quality",
+        label: "Revision Quality",
         strength: "Strong",
         status: "strong",
         initialLevel: 10,
@@ -137,8 +143,8 @@ const demos = {
         updated: "Learner moves from an absolute claim to a qualified principle."
       },
       {
-        label: "Application / transfer",
-        strength: "Needs evidence",
+        label: "Application / Transfer",
+        strength: "Needs Evidence",
         status: "watch",
         initialLevel: 16,
         updatedLevel: 44,
@@ -151,6 +157,63 @@ const demos = {
   }
 };
 
+// Live Dialogue Data
+const liveDialogueConcepts = {
+  fairness: {
+    name: "Fairness",
+    description: "The principle of treating similar cases similarly, unless there is a morally relevant difference.",
+    prompts: [
+      { kind: "Define", text: "Define 'fairness' in your own words." },
+      { kind: "Apply", text: "A hospital has 10 ventilators but 20 patients who need them to survive. Is it fair to give the ventilators to the first 10 patients who arrived? Why or why not?" },
+      { kind: "Challenge", text: "What if the first 10 patients are all elderly, and the last 10 are children? Does your answer change?" }
+    ],
+    followUp: "Ask: 'Can you think of a real-world policy where fairness requires treating people differently?'"
+  },
+  autonomy: {
+    name: "Autonomy",
+    description: "The capacity of a person to make their own decisions and act on their own values and interests.",
+    prompts: [
+      { kind: "Define", text: "Define 'autonomy' in your own words." },
+      { kind: "Apply", text: "A patient refuses a life-saving blood transfusion due to their religious beliefs. Should the doctor respect their autonomy and refuse the treatment, even if it means the patient will die?" },
+      { kind: "Challenge", text: "What if the patient is a child whose parents refuse the treatment on their behalf? Does your answer change?" }
+    ],
+    followUp: "Ask: 'How might autonomy conflict with other ethical principles, like beneficence or justice?'"
+  },
+  utilitarianism: {
+    name: "Utilitarianism",
+    description: "The ethical theory that actions are right if they promote happiness and wrong if they produce unhappiness.",
+    prompts: [
+      { kind: "Define", text: "What is the 'greatest happiness principle' in utilitarianism?" },
+      { kind: "Apply", text: "A doctor can save five patients by harvesting the organs of one healthy person. Should the doctor do it? Why or why not?" },
+      { kind: "Challenge", text: "What is one serious objection to deciding only by consequences?" }
+    ],
+    followUp: "Ask: 'How would a utilitarian justify a policy that harms a minority for the greater good?'"
+  },
+  kantianism: {
+    name: "Kantian Ethics",
+    description: "The ethical theory that actions are right if they are done from duty and respect for moral law.",
+    prompts: [
+      { kind: "Define", text: "What does it mean to act from duty in Kantian ethics?" },
+      { kind: "Apply", text: "A person lies to protect a friend from harm. Is this action morally permissible according to Kant? Why or why not?" },
+      { kind: "Challenge", text: "Can it be wrong to save more lives if doing so treats one person merely as a means?" }
+    ],
+    followUp: "Ask: 'How does Kant's idea of treating persons as ends in themselves apply to informed consent in healthcare?'"
+  },
+  justice: {
+    name: "Justice",
+    description: "The quality of being fair and reasonable, often involving the distribution of resources, rights, and duties.",
+    prompts: [
+      { kind: "Define", text: "Define 'justice' in your own words." },
+      { kind: "Apply", text: "A judge is deciding the punishment for a person who stole food to feed their starving family. Should the judge show mercy and give a lighter sentence, or uphold the law strictly for the sake of justice?" },
+      { kind: "Challenge", text: "If the person stole from someone who was also struggling, should the punishment be the same? Why or why not?" }
+    ],
+    followUp: "Ask: 'How would you design a just system for distributing limited medical resources?'"
+  }
+};
+
+// ============================================
+// Original Demo Logic
+// ============================================
 const timeline = document.querySelector("#timeline");
 const evidenceList = document.querySelector("#evidenceList");
 const moduleTitle = document.querySelector("#moduleTitle");
@@ -164,6 +227,8 @@ const resetDemoBtn = document.querySelector("#resetDemoBtn");
 const tabs = document.querySelectorAll(".tab");
 
 let activeDemoKey = "equity";
+let currentStep = 0;
+let isPlaying = false;
 let animationTimers = [];
 
 function clearAnimationTimers() {
@@ -177,6 +242,7 @@ function renderDemo(key) {
   moduleTitle.textContent = demo.moduleTitle;
   demoTitle.textContent = demo.title;
   demoSubtitle.textContent = demo.subtitle;
+  
   timeline.innerHTML = demo.sequence.map((step, index) => `
     <article class="timeline-item ${step.speakerClass}" data-step="${index}">
       <div class="timeline-role">${step.role}</div>
@@ -195,10 +261,12 @@ function renderDemo(key) {
     </article>
   `).join("");
 
+  instructorSummary.textContent = demo.summary;
+  currentStep = 0;
+  isPlaying = false;
   summaryStatus.textContent = "Waiting";
   summaryStatus.classList.remove("ready");
   evidenceStatus.textContent = "Ready";
-  instructorSummary.textContent = "The instructor summary appears after the learner revises the answer and the evidence record is updated.";
   revealInitialState();
 }
 
@@ -260,27 +328,237 @@ function runDemoSequence() {
         evidenceStatus.textContent = "Updated";
       }
 
-      if (index === 4) {
+      if (index === demo.sequence.length - 1) {
         summaryStatus.textContent = "Ready for instructor review";
         summaryStatus.classList.add("ready");
         evidenceStatus.textContent = "Reviewable";
         instructorSummary.textContent = demo.summary;
         playDemoBtn.disabled = false;
       }
-    }, index * 900);
+    }, index * 1000);
     animationTimers.push(timer);
   });
 }
 
-tabs.forEach(tab => {
-  tab.addEventListener("click", () => {
-    tabs.forEach(node => node.classList.remove("active"));
-    tab.classList.add("active");
-    renderDemo(tab.dataset.demo);
+function resetDemo() {
+  renderDemo(activeDemoKey);
+}
+
+function initOriginalDemo() {
+  if (!timeline) return;
+
+  tabs.forEach(tab => {
+    tab.addEventListener("click", () => {
+      tabs.forEach(node => node.classList.remove("active"));
+      tab.classList.add("active");
+      activeDemoKey = tab.dataset.demo;
+      renderDemo(activeDemoKey);
+    });
   });
+
+  playDemoBtn.addEventListener("click", runDemoSequence);
+  resetDemoBtn.addEventListener("click", resetDemo);
+  renderDemo(activeDemoKey);
+}
+
+// ============================================
+// Live Dialogue Logic
+// ============================================
+const liveConceptSelect = document.getElementById("liveConceptSelect");
+const startLiveDialogueBtn = document.getElementById("startLiveDialogueBtn");
+const resetLiveDialogueBtn = document.getElementById("resetLiveDialogueBtn");
+const liveChatMessages = document.getElementById("liveChatMessages");
+const liveStudentInput = document.getElementById("liveStudentInput");
+const liveSubmitBtn = document.getElementById("liveSubmitBtn");
+const liveScorecardDimensions = document.getElementById("liveScorecardDimensions");
+const liveFollowUpText = document.getElementById("liveFollowUpText");
+
+let currentLiveConcept = null;
+let currentLivePromptIndex = 0;
+
+function initLiveDialogue() {
+  if (!liveConceptSelect) return;
+
+  startLiveDialogueBtn.addEventListener("click", startLiveDialogue);
+  resetLiveDialogueBtn.addEventListener("click", resetLiveDialogue);
+  liveSubmitBtn.addEventListener("click", handleLiveStudentResponse);
+  liveStudentInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") handleLiveStudentResponse();
+  });
+}
+
+function startLiveDialogue() {
+  const conceptKey = liveConceptSelect.value;
+  currentLiveConcept = liveDialogueConcepts[conceptKey];
+  currentLivePromptIndex = 0;
+
+  liveStudentInput.disabled = false;
+  liveSubmitBtn.disabled = false;
+  resetLiveDialogueBtn.disabled = false;
+  startLiveDialogueBtn.disabled = true;
+
+  liveChatMessages.innerHTML = '';
+  addLiveMessage("system", currentLiveConcept.prompts[0].text);
+
+  resetLiveScorecard();
+  liveFollowUpText.textContent = "Complete the dialogue to see suggested follow-up questions.";
+}
+
+function resetLiveDialogue() {
+  liveChatMessages.innerHTML = '';
+  liveStudentInput.value = '';
+  liveStudentInput.disabled = true;
+  liveSubmitBtn.disabled = true;
+  resetLiveDialogueBtn.disabled = true;
+  startLiveDialogueBtn.disabled = false;
+  currentLiveConcept = null;
+  currentLivePromptIndex = 0;
+  resetLiveScorecard();
+  liveFollowUpText.textContent = "Start the dialogue to see suggested follow-up questions.";
+}
+
+function handleLiveStudentResponse() {
+  const response = liveStudentInput.value.trim();
+  if (!response) return;
+
+  addLiveMessage("student", response);
+  liveStudentInput.value = '';
+
+  const scores = mockLiveScoreResponse(response, currentLiveConcept.prompts[currentLivePromptIndex]);
+  updateLiveScorecard(scores);
+
+  currentLivePromptIndex++;
+
+  if (currentLivePromptIndex >= currentLiveConcept.prompts.length) {
+    addLiveMessage("system", "Dialogue complete. Review the scorecard and suggested follow-up.");
+    liveStudentInput.disabled = true;
+    liveSubmitBtn.disabled = true;
+    startLiveDialogueBtn.disabled = false;
+    liveFollowUpText.textContent = currentLiveConcept.followUp;
+    return;
+  }
+
+  const nextPrompt = currentLiveConcept.prompts[currentLivePromptIndex];
+  addLiveMessage("system", nextPrompt.text);
+}
+
+function addLiveMessage(role, text) {
+  const messageDiv = document.createElement("div");
+  messageDiv.className = `live-chat-message ${role}`;
+  messageDiv.innerHTML = `
+    <div class="live-message-role">${role === "student" ? "Learner" : "Socratic Follow-Up"}</div>
+    <p>${text}</p>
+  `;
+  liveChatMessages.appendChild(messageDiv);
+  liveChatMessages.scrollTop = liveChatMessages.scrollHeight;
+}
+
+function mockLiveScoreResponse(response, prompt) {
+  const scores = {
+    definition: 0,
+    application: 0,
+    counterexample: 0
+  };
+
+  const lowerResponse = response.toLowerCase();
+
+  if (prompt.kind === "Define" || lowerResponse.includes("define") || lowerResponse.includes("means")) {
+    scores.definition = 0.75 + (Math.random() * 0.2 - 0.1);
+  }
+  if (prompt.kind === "Apply" || lowerResponse.includes("example") || lowerResponse.includes("case") || lowerResponse.includes("situation")) {
+    scores.application = 0.75 + (Math.random() * 0.2 - 0.1);
+  }
+  if (prompt.kind === "Challenge" || lowerResponse.includes("but") || lowerResponse.includes("however") || lowerResponse.includes("unless")) {
+    scores.counterexample = 0.75 + (Math.random() * 0.2 - 0.1);
+  }
+
+  return scores;
+}
+
+function resetLiveScorecard() {
+  liveScorecardDimensions.innerHTML = `
+    <div class="live-scorecard-dimension">
+      <div class="live-scorecard-dimension-header">
+        <span class="live-scorecard-dimension-label">Definition</span>
+        <span class="live-scorecard-status">
+          <span class="live-status-icon needs-work">❌</span>
+          <span>Not started</span>
+        </span>
+      </div>
+      <div class="live-scorecard-dimension-notes">Waiting for student response.</div>
+    </div>
+    <div class="live-scorecard-dimension">
+      <div class="live-scorecard-dimension-header">
+        <span class="live-scorecard-dimension-label">Application</span>
+        <span class="live-scorecard-status">
+          <span class="live-status-icon needs-work">❌</span>
+          <span>Not started</span>
+        </span>
+      </div>
+      <div class="live-scorecard-dimension-notes">Waiting for student response.</div>
+    </div>
+    <div class="live-scorecard-dimension">
+      <div class="live-scorecard-dimension-header">
+        <span class="live-scorecard-dimension-label">Counterexample</span>
+        <span class="live-scorecard-status">
+          <span class="live-status-icon needs-work">❌</span>
+          <span>Not started</span>
+        </span>
+      </div>
+      <div class="live-scorecard-dimension-notes">Waiting for student response.</div>
+    </div>
+  `;
+}
+
+function updateLiveScorecard(scores) {
+  const dimensions = [
+    { id: "definition", label: "Definition", score: scores.definition },
+    { id: "application", label: "Application", score: scores.application },
+    { id: "counterexample", label: "Counterexample", score: scores.counterexample }
+  ];
+
+  let html = '';
+  dimensions.forEach(dim => {
+    let status, icon, note;
+    if (dim.score >= 0.75) {
+      status = "Strong";
+      icon = "strong";
+      note = `Learner demonstrated understanding of ${dim.label.toLowerCase()}.`;
+    } else if (dim.score >= 0.45) {
+      status = "Developing";
+      icon = "developing";
+      note = `Learner showed partial understanding of ${dim.label.toLowerCase()}.`;
+    } else if (dim.score > 0) {
+      status = "Emerging";
+      icon = "developing";
+      note = `Learner began to engage with ${dim.label.toLowerCase()}.`;
+    } else {
+      status = "Not started";
+      icon = "needs-work";
+      note = "Waiting for student response.";
+    }
+
+    html += `
+      <div class="live-scorecard-dimension">
+        <div class="live-scorecard-dimension-header">
+          <span class="live-scorecard-dimension-label">${dim.label}</span>
+          <span class="live-scorecard-status">
+            <span class="live-status-icon ${icon}">${icon === "strong" ? "✅" : icon === "developing" ? "🟡" : "❌"}</span>
+            <span>${status}</span>
+          </span>
+        </div>
+        <div class="live-scorecard-dimension-notes">${note}</div>
+      </div>
+    `;
+  });
+
+  liveScorecardDimensions.innerHTML = html;
+}
+
+// ============================================
+// Initialize Everything
+// ============================================
+document.addEventListener("DOMContentLoaded", () => {
+  initOriginalDemo();
+  initLiveDialogue();
 });
-
-playDemoBtn.addEventListener("click", runDemoSequence);
-resetDemoBtn.addEventListener("click", () => renderDemo(activeDemoKey));
-
-renderDemo(activeDemoKey);
