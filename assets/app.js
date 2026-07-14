@@ -1,6 +1,6 @@
 // ============================================
 // Socratic Assessment Platform - Main JavaScript
-// Public demo with original sequences + live dialogue
+// Public demo with original sequences + live dialogue + paper assessment
 // ============================================
 
 // Original Demo Data
@@ -208,6 +208,74 @@ const liveDialogueConcepts = {
       { kind: "Challenge", text: "If the person stole from someone who was also struggling, should the punishment be the same? Why or why not?" }
     ],
     followUp: "Ask: 'How would you design a just system for distributing limited medical resources?'"
+  }
+};
+
+// Paper Assessment Concepts
+const paperConcepts = {
+  ethics: {
+    keywords: ["ethics", "moral", "right", "wrong", "good", "bad", "justice", "fairness"],
+    questions: [
+      { kind: "Define", text: "Define the term '{concept}' as used in your paper." },
+      { kind: "Apply", text: "Give an example from your paper where {concept} is applied." },
+      { kind: "Challenge", text: "What is one objection to your use of {concept} in your paper?" }
+    ]
+  },
+  autonomy: {
+    keywords: ["autonomy", "self-determination", "freedom", "choice", "consent"],
+    questions: [
+      { kind: "Define", text: "Define 'autonomy' as used in your paper." },
+      { kind: "Apply", text: "How does your paper apply the concept of autonomy?" },
+      { kind: "Challenge", text: "Can autonomy ever be limited? Explain using an example from your paper." }
+    ]
+  },
+  utilitarianism: {
+    keywords: ["utilitarianism", "greatest happiness", "consequences", "outcomes", "utility"],
+    questions: [
+      { kind: "Define", text: "Define 'utilitarianism' as used in your paper." },
+      { kind: "Apply", text: "How does your paper apply utilitarian reasoning?" },
+      { kind: "Challenge", text: "What is one objection to utilitarianism mentioned in your paper?" }
+    ]
+  },
+  kantianism: {
+    keywords: ["kantian", "kant", "duty", "categorical imperative", "moral law"],
+    questions: [
+      { kind: "Define", text: "Define 'Kantian ethics' as used in your paper." },
+      { kind: "Apply", text: "How does your paper apply Kantian reasoning?" },
+      { kind: "Challenge", text: "Can Kantian ethics justify lying? Explain using your paper's arguments." }
+    ]
+  },
+  justice: {
+    keywords: ["justice", "fairness", "equality", "equity", "rights"],
+    questions: [
+      { kind: "Define", text: "Define 'justice' as used in your paper." },
+      { kind: "Apply", text: "How does your paper apply the concept of justice?" },
+      { kind: "Challenge", text: "What is one case where justice might conflict with another value in your paper?" }
+    ]
+  },
+  'informed consent': {
+    keywords: ["informed consent", "consent", "patient rights", "autonomy"],
+    questions: [
+      { kind: "Define", text: "Define 'informed consent' as used in your paper." },
+      { kind: "Apply", text: "How does your paper apply the concept of informed consent?" },
+      { kind: "Challenge", text: "What is one challenge to obtaining informed consent mentioned in your paper?" }
+    ]
+  },
+  beneficence: {
+    keywords: ["beneficence", "do no harm", "well-being", "patient benefit"],
+    questions: [
+      { kind: "Define", text: "Define 'beneficence' as used in your paper." },
+      { kind: "Apply", text: "How does your paper apply the principle of beneficence?" },
+      { kind: "Challenge", text: "Can beneficence ever conflict with autonomy? Explain using your paper's arguments." }
+    ]
+  },
+  nonmaleficence: {
+    keywords: ["nonmaleficence", "do no harm", "avoid harm", "primum non nocere"],
+    questions: [
+      { kind: "Define", text: "Define 'nonmaleficence' as used in your paper." },
+      { kind: "Apply", text: "How does your paper apply the principle of nonmaleficence?" },
+      { kind: "Challenge", text: "What is one case where nonmaleficence might conflict with beneficence in your paper?" }
+    ]
   }
 };
 
@@ -556,9 +624,325 @@ function updateLiveScorecard(scores) {
 }
 
 // ============================================
+// Paper Assessment Logic
+// ============================================
+const paperText = document.getElementById("paperText");
+const clearPaperBtn = document.getElementById("clearPaperBtn");
+const analyzePaperBtn = document.getElementById("analyzePaperBtn");
+const conceptsList = document.getElementById("conceptsList");
+const paperChatMessages = document.getElementById("paperChatMessages");
+const paperStudentInput = document.getElementById("paperStudentInput");
+const paperSubmitBtn = document.getElementById("paperSubmitBtn");
+const paperScorecardDimensions = document.getElementById("paperScorecardDimensions");
+const paperFollowUpText = document.getElementById("paperFollowUpText");
+const paperTextPreview = document.getElementById("paperTextPreview");
+const dialogueTranscript = document.getElementById("dialogueTranscript");
+const redFlagsList = document.getElementById("redFlagsList");
+const reviewGrid = document.getElementById("reviewGrid");
+
+let currentPaperConcepts = [];
+let currentPaperDialogue = [];
+let currentPaperPromptIndex = 0;
+let paperRedFlags = [];
+
+function initPaperAssessment() {
+  if (!paperText) return;
+
+  clearPaperBtn.addEventListener("click", clearPaper);
+  analyzePaperBtn.addEventListener("click", analyzePaper);
+  paperSubmitBtn.addEventListener("click", handlePaperStudentResponse);
+  paperStudentInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") handlePaperStudentResponse();
+  });
+}
+
+function clearPaper() {
+  paperText.value = "";
+  conceptsList.innerHTML = "<p style='color: var(--muted);'>Submit a paper to see detected concepts.</p>";
+  paperChatMessages.innerHTML = '<div class="live-chat-message system"><div class="live-message-role">System</div><p>Submit a paper to start the dialogue.</p></div>';
+  paperStudentInput.disabled = true;
+  paperSubmitBtn.disabled = true;
+  resetPaperScorecard();
+  paperFollowUpText.textContent = "Submit a paper to see faculty review notes.";
+  paperTextPreview.innerHTML = "<p style='color: var(--muted);'>No paper submitted yet.</p>";
+  dialogueTranscript.innerHTML = "<p style='color: var(--muted);'>No dialogue yet.</p>";
+  redFlagsList.innerHTML = "<p style='color: var(--muted);'>No red flags detected.</p>";
+  currentPaperConcepts = [];
+  currentPaperDialogue = [];
+  currentPaperPromptIndex = 0;
+  paperRedFlags = [];
+}
+
+function analyzePaper() {
+  const text = paperText.value.trim();
+  if (!text) {
+    alert("Please paste your paper text.");
+    return;
+  }
+
+  currentPaperConcepts = extractConceptsFromPaper(text);
+  displayDetectedConcepts();
+
+  if (currentPaperConcepts.length > 0) {
+    currentPaperPromptIndex = 0;
+    currentPaperDialogue = [];
+    const firstConcept = currentPaperConcepts[0];
+    const firstQuestion = firstConcept.questions[0].text.replace("{concept}", firstConcept.name);
+    paperChatMessages.innerHTML = '';
+    addPaperMessage("system", firstQuestion);
+    currentPaperDialogue.push({ role: "system", text: firstQuestion });
+    resetPaperScorecard();
+    paperFollowUpText.textContent = "Complete the dialogue to see faculty review notes.";
+    paperStudentInput.disabled = false;
+    paperSubmitBtn.disabled = false;
+  } else {
+    paperChatMessages.innerHTML = '<div class="live-chat-message system"><div class="live-message-role">System</div><p>No key concepts detected in your paper. Try including terms like \'ethics,\' \'autonomy,\' or \'justice.\'</p></div>';
+    paperStudentInput.disabled = true;
+    paperSubmitBtn.disabled = true;
+  }
+
+  updateFacultyReviewDashboard();
+}
+
+function extractConceptsFromPaper(text) {
+  const detectedConcepts = [];
+  const lowerText = text.toLowerCase();
+
+  for (const concept in paperConcepts) {
+    const keywords = paperConcepts[concept].keywords;
+    const matches = keywords.filter(keyword => lowerText.includes(keyword));
+    if (matches.length > 0) {
+      detectedConcepts.push({
+        name: concept,
+        keywords: matches,
+        questions: paperConcepts[concept].questions
+      });
+    }
+  }
+
+  return detectedConcepts;
+}
+
+function displayDetectedConcepts() {
+  if (currentPaperConcepts.length === 0) {
+    conceptsList.innerHTML = "<p style='color: var(--muted);'>No key concepts detected.</p>";
+    return;
+  }
+
+  let html = "";
+  currentPaperConcepts.forEach(concept => {
+    html += `<span class="concept-tag">${concept.name}</span>`;
+  });
+  conceptsList.innerHTML = html;
+}
+
+function handlePaperStudentResponse() {
+  const response = paperStudentInput.value.trim();
+  if (!response || currentPaperConcepts.length === 0) return;
+
+  addPaperMessage("student", response);
+  currentPaperDialogue.push({ role: "student", text: response });
+  paperStudentInput.value = "";
+
+  const currentConcept = currentPaperConcepts[Math.floor(currentPaperPromptIndex / 3)];
+  const currentQuestion = currentConcept.questions[currentPaperPromptIndex % 3];
+  const scores = mockPaperScoreResponse(response, currentQuestion);
+  updatePaperScorecard(scores);
+
+  checkForRedFlags(response, currentConcept.name);
+
+  currentPaperPromptIndex++;
+
+  if (currentPaperPromptIndex >= currentPaperConcepts.length * 3) {
+    addPaperMessage("system", "Dialogue complete. Review the scorecard and faculty notes.");
+    currentPaperDialogue.push({ role: "system", text: "Dialogue complete. Review the scorecard and faculty notes." });
+    paperStudentInput.disabled = true;
+    paperSubmitBtn.disabled = true;
+    paperFollowUpText.textContent = "Faculty will review your dialogue and paper for understanding.";
+    updateFacultyReviewDashboard();
+    return;
+  }
+
+  const nextConceptIndex = Math.floor(currentPaperPromptIndex / 3);
+  const nextQuestionIndex = currentPaperPromptIndex % 3;
+  const nextConcept = currentPaperConcepts[nextConceptIndex];
+  const nextQuestion = nextConcept.questions[nextQuestionIndex].text.replace("{concept}", nextConcept.name);
+  addPaperMessage("system", nextQuestion);
+  currentPaperDialogue.push({ role: "system", text: nextQuestion });
+  updateFacultyReviewDashboard();
+}
+
+function addPaperMessage(role, text) {
+  const messageDiv = document.createElement("div");
+  messageDiv.className = `live-chat-message ${role}`;
+  messageDiv.innerHTML = `
+    <div class="live-message-role">${role === "student" ? "Student" : "System"}</div>
+    <p>${text}</p>
+  `;
+  paperChatMessages.appendChild(messageDiv);
+  paperChatMessages.scrollTop = paperChatMessages.scrollHeight;
+}
+
+function mockPaperScoreResponse(response, prompt) {
+  const scores = {
+    definition: 0,
+    application: 0,
+    counterexample: 0
+  };
+
+  const lowerResponse = response.toLowerCase();
+
+  if (prompt.kind === "Define" || lowerResponse.includes("define") || lowerResponse.includes("means")) {
+    scores.definition = 0.75 + (Math.random() * 0.2 - 0.1);
+  }
+  if (prompt.kind === "Apply" || lowerResponse.includes("example") || lowerResponse.includes("case") || lowerResponse.includes("situation")) {
+    scores.application = 0.75 + (Math.random() * 0.2 - 0.1);
+  }
+  if (prompt.kind === "Challenge" || lowerResponse.includes("but") || lowerResponse.includes("however") || lowerResponse.includes("unless")) {
+    scores.counterexample = 0.75 + (Math.random() * 0.2 - 0.1);
+  }
+
+  return scores;
+}
+
+function resetPaperScorecard() {
+  paperScorecardDimensions.innerHTML = `
+    <div class="live-scorecard-dimension">
+      <div class="live-scorecard-dimension-header">
+        <span class="live-scorecard-dimension-label">Definition</span>
+        <span class="live-scorecard-status">
+          <span class="live-status-icon needs-work">❌</span>
+          <span>Not started</span>
+        </span>
+      </div>
+      <div class="live-scorecard-dimension-notes">Waiting for student response.</div>
+    </div>
+    <div class="live-scorecard-dimension">
+      <div class="live-scorecard-dimension-header">
+        <span class="live-scorecard-dimension-label">Application</span>
+        <span class="live-scorecard-status">
+          <span class="live-status-icon needs-work">❌</span>
+          <span>Not started</span>
+        </span>
+      </div>
+      <div class="live-scorecard-dimension-notes">Waiting for student response.</div>
+    </div>
+    <div class="live-scorecard-dimension">
+      <div class="live-scorecard-dimension-header">
+        <span class="live-scorecard-dimension-label">Counterexample</span>
+        <span class="live-scorecard-status">
+          <span class="live-status-icon needs-work">❌</span>
+          <span>Not started</span>
+        </span>
+      </div>
+      <div class="live-scorecard-dimension-notes">Waiting for student response.</div>
+    </div>
+  `;
+}
+
+function updatePaperScorecard(scores) {
+  const dimensions = [
+    { id: "definition", label: "Definition", score: scores.definition },
+    { id: "application", label: "Application", score: scores.application },
+    { id: "counterexample", label: "Counterexample", score: scores.counterexample }
+  ];
+
+  let html = '';
+  dimensions.forEach(dim => {
+    let status, icon, note;
+    if (dim.score >= 0.75) {
+      status = "Strong";
+      icon = "strong";
+      note = `Student demonstrated understanding of ${dim.label.toLowerCase()}.`;
+    } else if (dim.score >= 0.45) {
+      status = "Developing";
+      icon = "developing";
+      note = `Student showed partial understanding of ${dim.label.toLowerCase()}.`;
+    } else if (dim.score > 0) {
+      status = "Emerging";
+      icon = "developing";
+      note = `Student began to engage with ${dim.label.toLowerCase()}.`;
+    } else {
+      status = "Not started";
+      icon = "needs-work";
+      note = "Waiting for student response.";
+    }
+
+    html += `
+      <div class="live-scorecard-dimension">
+        <div class="live-scorecard-dimension-header">
+          <span class="live-scorecard-dimension-label">${dim.label}</span>
+          <span class="live-scorecard-status">
+            <span class="live-status-icon ${icon}">${icon === "strong" ? "✅" : icon === "developing" ? "🟡" : "❌"}</span>
+            <span>${status}</span>
+          </span>
+        </div>
+        <div class="live-scorecard-dimension-notes">${note}</div>
+      </div>
+    `;
+  });
+
+  paperScorecardDimensions.innerHTML = html;
+}
+
+function checkForRedFlags(response, concept) {
+  const lowerResponse = response.toLowerCase();
+  const lowerConcept = concept.toLowerCase();
+  const newRedFlags = [...paperRedFlags];
+
+  if (paperText.value.toLowerCase().includes(lowerConcept) && !lowerResponse.includes("define") && !lowerResponse.includes("means")) {
+    const flag = `Student used '${concept}' in their paper but could not define it.`;
+    if (!newRedFlags.includes(flag)) newRedFlags.push(flag);
+  }
+
+  if (response.split(" ").length < 10) {
+    const flag = `Student gave a shallow response to a question about '${concept}'.`;
+    if (!newRedFlags.includes(flag)) newRedFlags.push(flag);
+  }
+
+  if (currentPaperPromptIndex > 0 && (lowerResponse.includes("no") || lowerResponse.includes("i don't know"))) {
+    const flag = `Student refused to engage with a question about '${concept}'.`;
+    if (!newRedFlags.includes(flag)) newRedFlags.push(flag);
+  }
+
+  paperRedFlags = newRedFlags;
+  updateRedFlagsList();
+}
+
+function updateRedFlagsList() {
+  if (paperRedFlags.length === 0) {
+    redFlagsList.innerHTML = "<p style='color: var(--muted);'>No red flags detected.</p>";
+    return;
+  }
+
+  let html = "";
+  paperRedFlags.forEach(flag => {
+    html += `<div class="red-flag-item">${flag}</div>`;
+  });
+  redFlagsList.innerHTML = html;
+}
+
+function updateFacultyReviewDashboard() {
+  paperTextPreview.innerHTML = paperText.value.trim() ? `<pre style="margin: 0;">${paperText.value.trim()}</pre>` : "<p style='color: var(--muted);'>No paper submitted yet.</p>";
+
+  if (currentPaperDialogue.length === 0) {
+    dialogueTranscript.innerHTML = "<p style='color: var(--muted);'>No dialogue yet.</p>";
+  } else {
+    let html = "";
+    currentPaperDialogue.forEach(message => {
+      html += `<div class="transcript-message ${message.role}"><strong>${message.role === "student" ? "Student" : "System"}:</strong> ${message.text}</div>`;
+    });
+    dialogueTranscript.innerHTML = html;
+  }
+
+  updateRedFlagsList();
+}
+
+// ============================================
 // Initialize Everything
 // ============================================
 document.addEventListener("DOMContentLoaded", () => {
   initOriginalDemo();
   initLiveDialogue();
+  initPaperAssessment();
 });
