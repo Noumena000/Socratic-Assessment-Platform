@@ -2,9 +2,9 @@
 
 **Make understanding demonstrable through dialogue.**
 
-This is a static, public-facing showcase for the Socratic Assessment Platform. The project explores whether conceptual understanding can be demonstrated through structured dialogue rather than inferred only from polished essays, quiz answers, or selected responses.
+This repository contains the static, public-facing showcase for the Socratic Assessment Platform. The project explores whether conceptual understanding can be demonstrated through structured dialogue rather than inferred only from polished essays, quiz answers, or selected responses.
 
-The key idea is not to “detect AI use.” Instead, the platform asks whether a learner can explain, defend, apply, challenge, and revise the ideas they submit. Even if a student used an AI chatbot while preparing written work, understanding still has to survive Socratic examination.
+The central question is not whether a system can detect AI authorship. It is whether a learner can explain, defend, apply, challenge, and revise the ideas they submit.
 
 ## Educational thesis
 
@@ -21,31 +21,20 @@ The platform is designed to gather formative evidence of whether a learner can:
 
 The instructor remains the final evaluator. The platform produces evidence for review, not authoritative grades.
 
-## What this public site includes
+## What the public showcase includes
 
-- A public-facing product vision
-- Fictional sample dialogues
-- A formative evidence report preview
-- A high-level assessment workflow
-- Privacy and governance language
-- A roadmap for cautious institutional discussion
+- a public-facing product vision
+- fictional sample dialogues
+- a formative evidence preview
+- a high-level paper-to-dialogue workflow
+- privacy, accessibility, and governance language
+- a roadmap for cautious institutional discussion
 
+## What the public showcase does not do
 
-## Optional AI Connection Panel
+The public site does not connect to an AI provider, accept API keys, submit learner data, or expose a production reasoning service. Any future production reasoning capability would operate separately behind an institutionally approved backend with appropriate security, privacy, accessibility, and governance controls.
 
-The public showcase now includes a modular **Reasoning Provider** panel for private testing. It can point to:
-
-- LM Studio or another local OpenAI-compatible server
-- Ollama's OpenAI-compatible endpoint
-- Mistral Cloud
-- OpenAI-compatible cloud endpoints
-- a custom chat-completions endpoint
-
-No API key is included in the repository. Keys should never be committed. The panel can remember settings only in the current browser's local storage when the user explicitly checks the remember option.
-
-For production, provider calls should move behind a secure, institutionally approved backend rather than being made directly from a public static page.
-
-## What this public site intentionally omits
+The repository intentionally omits:
 
 - private reasoning-engine source code
 - prompt architecture
@@ -54,22 +43,38 @@ For production, provider calls should move behind a secure, institutionally appr
 - learner records or institutional data
 - production implementation details
 
-## How to use
+## Accessibility
 
-Open `index.html` in a browser.
+The showcase includes keyboard-visible focus states, a skip-navigation link, reduced-motion support, semantic regions, accessible dialogue tabs, and live-region announcements for the simulated assessment sequence. Accessibility should continue to be tested as the prototype evolves.
 
-## How to publish on GitHub Pages
+## Local preview
 
-1. Create a new public GitHub repository, for example `socratic-assessment-platform`.
-2. Upload the contents of this folder, not the private reasoning engine or development project.
-3. In GitHub, go to **Settings → Pages**.
-4. Set the source to the `main` branch and `/root`.
-5. Share the generated GitHub Pages URL.
+No build process or package installation is required.
+
+1. Download or clone the repository.
+2. Open `index.html` in a modern browser.
+
+## GitHub Pages deployment
+
+1. Open the repository **Settings**.
+2. Select **Pages**.
+3. Set the source to the `main` branch and `/root`.
+4. Save the configuration.
+
+The public site is deployed at:
+
+`https://noumena000.github.io/Socratic-Assessment-Platform/`
 
 ## Suggested meeting framing
 
-“I am not proposing deployment yet. I am exploring whether structured dialogue can help faculty gather better evidence of student understanding, especially in an era when polished written answers may not reliably show what a learner can explain, defend, or revise.”
+> I am not proposing deployment yet. I am exploring whether structured dialogue can help faculty gather better evidence of student understanding, especially in an era when polished written answers may not reliably show what a learner can explain, defend, or revise.
 
 ## Status
 
-Research prototype. Public showcase only.
+Research prototype. Public showcase only. Not a production assessment system.
+
+## Rights and permitted use
+
+© 2026 Benjamin Moss. All rights reserved.
+
+This repository is made available solely for viewing and evaluating the public research demonstration. No license is granted to reproduce, distribute, modify, publish, sublicense, commercialize, or create derivative works from the platform, interface, assessment model, written materials, or associated assets without prior written permission. See `NOTICE.md` for the complete notice.
