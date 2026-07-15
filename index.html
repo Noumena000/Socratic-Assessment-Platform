@@ -15,7 +15,1365 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%2317344b'/%3E%3Cpath d='M18 39c7 6 21 6 28-2M19 24h26M23 32h18' stroke='%23f4efe7' stroke-width='5' stroke-linecap='round' fill='none'/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="assets/styles.css">
+  
+  <style>
+    :root {
+      --bg: #f6f3ee;
+      --bg-strong: #e8edf0;
+      --surface: rgba(255, 255, 255, 0.88);
+      --card: #ffffff;
+      --ink: #1b2430;
+      --muted: #5f6772;
+      --line: rgba(27, 36, 48, 0.12);
+      --line-strong: rgba(27, 36, 48, 0.2);
+      --navy: #17344b;
+      --navy-soft: #224d69;
+      --gold: #a97832;
+      --sage: #42685c;
+      --rose: #924e53;
+      --clay: #8d5d4a;
+      --shadow: 0 20px 52px rgba(19, 37, 51, 0.08);
+      --shadow-soft: 0 10px 28px rgba(19, 37, 51, 0.05);
+      --shadow-panel: 0 28px 72px rgba(16, 31, 44, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Manrope", system-ui, sans-serif;
+      color: var(--ink);
+      background:
+        linear-gradient(90deg, rgba(23, 52, 75, 0.025) 1px, transparent 1px),
+        linear-gradient(180deg, #faf8f4 0%, var(--bg) 44%, #f8faf8 100%);
+      background-size: 48px 48px, auto;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    p {
+      line-height: 1.65;
+    }
+
+    /* iOS-Specific Fixes */
+    @supports (-webkit-touch-callout: none) {
+      h1, h2, h3, h4 {
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+      }
+      .hero {
+        padding-top: 120px;
+      }
+    }
+
+    /* Header */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(18px);
+      background: rgba(244, 239, 231, 0.82);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      display: inline-grid;
+      place-items: center;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--navy), var(--navy-soft));
+      color: #fff;
+      font-size: 13px;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .nav-links a:hover {
+      color: var(--ink);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 100px 24px 74px;
+      max-width: 1180px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 640px) minmax(420px, 520px);
+      justify-content: space-between;
+      gap: clamp(64px, 8vw, 120px);
+      align-items: start;
+      overflow-x: clip;
+    }
+
+    .hero-copy {
+      min-width: 0;
+      max-width: 640px;
+      padding-top: 12px;
+      overflow-wrap: break-word;
+      word-break: break-word;
+    }
+
+    .hero-visual {
+      min-width: 0;
+      width: 100%;
+      max-width: 520px;
+      justify-self: end;
+    }
+
+    .eyebrow {
+      margin: 0 0 14px;
+      color: var(--navy-soft);
+      text-transform: uppercase;
+      letter-spacing: 0;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    h1, h2, h3, h4 {
+      margin: 0;
+      line-height: 1.02;
+      letter-spacing: 0;
+      font-family: "Fraunces", Georgia, "Times New Roman", serif;
+      font-weight: 600;
+    }
+
+    h1 {
+      font-size: 4rem;
+      margin-bottom: 18px;
+      max-width: 640px;
+      line-height: 0.92;
+      overflow-wrap: normal;
+      word-break: normal;
+      text-wrap: balance;
+      padding-right: 0;
+    }
+
+    /* Replace clamp() with media queries for iOS */
+    @media (min-width: 600px) {
+      h1 {
+        font-size: calc(4rem + (6.25rem - 4rem) * ((100vw - 600px) / (1200 - 600)));
+      }
+    }
+
+    @media (min-width: 1200px) {
+      h1 {
+        font-size: 6.25rem;
+      }
+    }
+
+    h2 {
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
+    }
+
+    h3 {
+      font-size: 1.4rem;
+      letter-spacing: 0;
+    }
+
+    h4 {
+      font-size: 1.05rem;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      margin: 0;
+      max-width: 23ch;
+      font-size: 1.28rem;
+      color: var(--navy);
+    }
+
+    .hero-detail {
+      max-width: 34rem;
+      font-size: 1rem;
+      margin-top: 16px;
+      color: var(--muted);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 30px 0 18px;
+    }
+
+    .status-note {
+      max-width: 34rem;
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    /* Buttons */
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 13px 18px;
+      border-radius: 8px;
+      border: 1px solid var(--line-strong);
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 180ms ease, background-color 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+      font-family: inherit;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .button:hover:not(:disabled) {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .button:disabled {
+      cursor: not-allowed;
+      opacity: 0.7;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .button:focus-visible {
+      outline: 3px solid rgba(34, 77, 105, 0.28);
+      outline-offset: 3px;
+    }
+
+    .button.primary {
+      background: var(--navy);
+      border-color: var(--navy);
+      color: #fff;
+    }
+
+    .button.secondary {
+      background: rgba(255, 255, 255, 0.54);
+    }
+
+    .button.small {
+      padding: 10px 14px;
+      font-size: 0.92rem;
+    }
+
+    .button.large {
+      padding: 16px 24px;
+      font-size: 1.05rem;
+    }
+
+    /* Hero Panel */
+    .hero-panel {
+      position: relative;
+      width: 100%;
+      max-width: 520px;
+      margin-top: 52px;
+      margin-left: auto;
+      padding: 26px;
+      border-radius: 8px;
+      color: #fff;
+      background:
+        radial-gradient(circle at top right, rgba(182, 138, 75, 0.18), transparent 30%),
+        linear-gradient(160deg, #122838 0%, #17344b 52%, #214f69 100%);
+      box-shadow: var(--shadow-panel);
+      border: 1px solid var(--line);
+    }
+
+    .window-dots {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 26px;
+    }
+
+    .window-dots span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.36);
+    }
+
+    .hero-stack {
+      display: grid;
+      gap: 18px;
+    }
+
+    .hero-card,
+    .hero-mini-card {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 8px;
+    }
+
+    .hero-card {
+      padding: 28px;
+    }
+
+    .hero-card h2 {
+      font-size: 2.1rem;
+      margin: 12px 0 12px;
+    }
+
+    .hero-card p,
+    .hero-mini-card span {
+      color: rgba(255, 255, 255, 0.78);
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 6px 10px;
+      background: rgba(182, 138, 75, 0.18);
+      color: #f1d59e;
+      border-radius: 999px;
+      font-size: 0.74rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .hero-mini-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .hero-mini-card {
+      min-height: 132px;
+      padding: 18px;
+    }
+
+    .hero-mini-card strong {
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    /* Sections */
+    .section {
+      padding: 88px 24px;
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .section-divider {
+      height: 1px;
+      background: var(--line);
+      margin: 40px auto;
+      max-width: 1180px;
+    }
+
+    .section-heading {
+      max-width: 780px;
+      margin-bottom: 38px;
+    }
+
+    .section-heading.centered {
+      max-width: 860px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
+
+    .section-heading p:last-child {
+      font-size: 1.08rem;
+      color: var(--muted);
+    }
+
+    /* Demo Shell */
+    .demo-shell {
+      display: grid;
+      gap: 18px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.72);
+      box-shadow: var(--shadow);
+    }
+
+    .demo-section {
+      padding-top: 54px;
+    }
+
+    .demo-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .demo-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .tab {
+      padding: 14px 18px;
+      border-radius: 8px;
+      border: 1px solid var(--line-strong);
+      background: rgba(255, 255, 255, 0.58);
+      color: var(--muted);
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .tab.active {
+      background: var(--navy);
+      border-color: var(--navy);
+      color: #fff;
+    }
+
+    .demo-stage {
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(300px, 0.75fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .dialogue-panel,
+    .evidence-panel {
+      min-width: 0;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .dialogue-panel {
+      padding: 24px;
+    }
+
+    .demo-header,
+    .panel-heading {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .demo-header {
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .demo-header p:not(.eyebrow) {
+      color: var(--muted);
+      margin-bottom: 0;
+    }
+
+    .badge {
+      padding: 7px 10px;
+      color: var(--sage);
+      background: rgba(66, 104, 92, 0.14);
+      white-space: nowrap;
+      border-radius: 999px;
+      font-size: 0.74rem;
+      font-weight: 800;
+    }
+
+    /* Chat Window */
+    .chat-window {
+      display: grid;
+      gap: 14px;
+      margin: 20px 0 24px;
+      min-height: 500px;
+      align-content: start;
+    }
+
+    .timeline-item {
+      display: grid;
+      gap: 8px;
+      width: min(88%, 640px);
+      padding: 14px 16px;
+      border-radius: 8px;
+      background: #f8f3eb;
+      border: 1px solid transparent;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 320ms ease, transform 320ms ease, border-color 320ms ease, background-color 320ms ease;
+    }
+
+    .timeline-item.learner {
+      justify-self: end;
+      background: #eaf1f5;
+      border-color: rgba(34, 77, 105, 0.14);
+    }
+
+    .timeline-item.system {
+      justify-self: start;
+      background: #fff7ec;
+      border-color: rgba(169, 120, 50, 0.18);
+    }
+
+    .timeline-item.summary {
+      justify-self: center;
+      width: min(94%, 720px);
+      background: #eef5ef;
+      border-color: rgba(66, 104, 92, 0.18);
+    }
+
+    .timeline-item.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .timeline-item.active {
+      border-color: rgba(34, 77, 105, 0.24);
+      box-shadow: 0 12px 26px rgba(23, 52, 75, 0.08);
+    }
+
+    .timeline-role {
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0;
+      color: var(--navy-soft);
+    }
+
+    .timeline-item p {
+      margin: 0;
+    }
+
+    /* Evidence Panel */
+    .evidence-panel {
+      display: grid;
+      gap: 16px;
+    }
+
+    .evidence-card,
+    .summary-card {
+      padding: 20px;
+    }
+
+    .panel-heading p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .live-dot,
+    .summary-status {
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 0.74rem;
+      font-weight: 800;
+    }
+
+    .live-dot {
+      color: var(--gold);
+      background: rgba(182, 138, 75, 0.14);
+    }
+
+    .summary-status {
+      color: var(--muted);
+      background: rgba(27, 36, 48, 0.06);
+    }
+
+    .summary-status.ready {
+      color: var(--sage);
+      background: rgba(66, 104, 92, 0.14);
+    }
+
+    .evidence-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .evidence-entry {
+      padding: 14px;
+      border-radius: 8px;
+      background: #fbf8f2;
+      border: 1px solid var(--line);
+      opacity: 0.78;
+      transform: scale(0.985);
+      transition: opacity 260ms ease, transform 260ms ease, border-color 260ms ease, background-color 260ms ease;
+    }
+
+    .evidence-entry.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .evidence-entry.highlight {
+      border-color: rgba(66, 104, 92, 0.28);
+      background: #f3f8f3;
+    }
+
+    .evidence-entry.active-build {
+      border-color: rgba(34, 77, 105, 0.24);
+      background: #f6fbfc;
+    }
+
+    .evidence-topline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .strength {
+      padding: 5px 8px;
+      color: var(--sage);
+      background: rgba(66, 104, 92, 0.12);
+      border-radius: 999px;
+      font-size: 0.74rem;
+      font-weight: 800;
+    }
+
+    .evidence-meter {
+      overflow: hidden;
+      height: 8px;
+      margin: 10px 0;
+      border-radius: 999px;
+      background: rgba(27, 36, 48, 0.08);
+    }
+
+    .evidence-fill {
+      display: block;
+      height: 100%;
+      width: var(--level, 0%);
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--sage), #6f8f6b);
+      transition: width 520ms ease;
+    }
+
+    .evidence-entry[data-status="watch"] .strength,
+    .evidence-entry[data-status="watch"] .evidence-fill {
+      color: var(--clay);
+    }
+
+    .evidence-entry[data-status="watch"] .strength {
+      background: rgba(141, 93, 74, 0.12);
+    }
+
+    .evidence-entry[data-status="watch"] .evidence-fill {
+      background: linear-gradient(90deg, var(--clay), #b98b5e);
+    }
+
+    /* Static Paper Assessment Section */
+    .paper-assessment-section {
+      padding: 40px 0;
+    }
+
+    .example-panel {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+      margin-bottom: 24px;
+    }
+
+    .example-panel h3 {
+      color: var(--navy);
+      margin-bottom: 16px;
+    }
+
+    .paper-text {
+      padding: 12px;
+      background: rgba(246, 243, 238, 0.3);
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      white-space: pre-wrap;
+    }
+
+    .paper-text p {
+      margin: 0 0 12px;
+    }
+
+    .paper-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    .static-dialogue {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(246, 243, 238, 0.3);
+      padding: 18px;
+      margin: 16px 0;
+      min-height: 300px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .static-scorecard {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .static-scorecard h3 {
+      margin-top: 0;
+      color: var(--navy);
+    }
+
+    .static-scorecard > p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+    }
+
+    .static-scorecard-dimensions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .static-scorecard-dimension {
+      padding: 12px;
+      background: rgba(246, 243, 238, 0.5);
+      border-radius: 8px;
+      border: 1px solid var(--line);
+    }
+
+    .static-scorecard-dimension-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .static-scorecard-dimension-label {
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    .static-scorecard-status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.9rem;
+    }
+
+    .static-status-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+    }
+
+    .static-status-icon.strong {
+      background: rgba(66, 104, 92, 0.15);
+      color: var(--sage);
+    }
+
+    .static-status-icon.developing {
+      background: rgba(182, 138, 75, 0.15);
+      color: var(--gold);
+    }
+
+    .static-status-icon.needs-work {
+      background: rgba(141, 93, 74, 0.15);
+      color: var(--clay);
+    }
+
+    .static-scorecard-dimension-notes {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 5px;
+    }
+
+    .static-follow-up {
+      margin-top: 16px;
+      padding: 12px;
+      background: rgba(23, 52, 75, 0.05);
+      border-radius: 8px;
+      border: 1px solid var(--line);
+    }
+
+    .static-follow-up h4 {
+      margin: 0 0 8px;
+      color: var(--navy);
+      font-size: 1rem;
+    }
+
+    .static-follow-up p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    /* Faculty Dashboard (Static) */
+    .faculty-review-container {
+      margin-bottom: 40px;
+    }
+
+    .faculty-review-panel {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .faculty-review-panel h3 {
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .faculty-review-panel p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+    }
+
+    .review-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1px;
+      background: var(--line);
+    }
+
+    @media (max-width: 1050px) {
+      .review-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .review-wide {
+      grid-column: span 2;
+    }
+
+    @media (max-width: 1050px) {
+      .review-wide {
+        grid-column: auto;
+      }
+    }
+
+    .dashboard-card {
+      padding: 24px;
+      min-height: 172px;
+      border: 0;
+      border-radius: 0;
+      box-shadow: none;
+      background: #fff;
+    }
+
+    .card-label {
+      display: inline-block;
+      margin-bottom: 8px;
+      color: var(--navy-soft);
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+
+    .paper-text-preview {
+      max-height: 300px;
+      overflow-y: auto;
+      padding: 12px;
+      background: rgba(246, 243, 238, 0.3);
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      white-space: pre-wrap;
+    }
+
+    .dialogue-transcript {
+      max-height: 300px;
+      overflow-y: auto;
+      padding: 12px;
+      background: rgba(246, 243, 238, 0.3);
+      border-radius: 8px;
+      border: 1px solid var(--line);
+    }
+
+    .transcript-message {
+      padding: 8px 12px;
+      margin-bottom: 10px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+    }
+
+    .transcript-message.system {
+      background: rgba(182, 138, 75, 0.1);
+      border: 1px solid rgba(182, 138, 75, 0.2);
+    }
+
+    .transcript-message.student {
+      background: rgba(34, 77, 105, 0.08);
+      border: 1px solid rgba(34, 77, 105, 0.2);
+    }
+
+    .red-flags-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .red-flag-item {
+      padding: 10px 12px;
+      background: rgba(141, 93, 74, 0.08);
+      border: 1px solid rgba(141, 93, 74, 0.2);
+      border-radius: 8px;
+      font-size: 0.9rem;
+      color: var(--clay);
+    }
+
+    /* Security Features Section */
+    .security-section {
+      padding: 60px 24px;
+      background: #f8f9fa;
+    }
+
+    .security-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .security-card {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .security-icon {
+      font-size: 2.5rem;
+      margin-bottom: 16px;
+    }
+
+    .security-card h3 {
+      color: var(--navy);
+      margin-bottom: 12px;
+    }
+
+    .security-card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    /* Copy Protection Demo */
+    .copy-protection-demo {
+      margin-top: 20px;
+      position: relative;
+    }
+
+    .browser-mockup {
+      background: #fff;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      margin-top: 16px;
+    }
+
+    .browser-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 16px;
+      background: #f0f0f0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .browser-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #ccc;
+    }
+
+    .browser-title {
+      flex: 1;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #666;
+    }
+
+    .browser-content {
+      padding: 16px;
+      min-height: 150px;
+      position: relative;
+    }
+
+    .textarea-mockup {
+      width: 100%;
+      min-height: 100px;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      background: #fafafa;
+      font-family: inherit;
+      font-size: 0.9rem;
+      color: #666;
+      cursor: not-allowed;
+      position: relative;
+    }
+
+    .copy-blocked-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(255, 255, 255, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 8px;
+      color: #888;
+      font-size: 0.9rem;
+      pointer-events: none;
+    }
+
+    .copy-blocked-overlay .icon {
+      font-size: 1.5rem;
+    }
+
+    .toast-message {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #333;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+      display: none;
+    }
+
+    /* Comparison Section */
+    .comparison-section {
+      padding-top: 46px;
+    }
+
+    .comparison-card {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 28px;
+      align-items: center;
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .comparison-card h2 {
+      font-size: 2.2rem;
+    }
+
+    .comparison-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .comparison-track {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfaf7;
+    }
+
+    .comparison-track.socratic {
+      background: #f4faf7;
+      border-color: rgba(66, 104, 92, 0.2);
+    }
+
+    .flow-line {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .flow-line span {
+      position: relative;
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--muted);
+      font-weight: 800;
+      font-size: 0.88rem;
+    }
+
+    .flow-line span:not(:last-child)::after {
+      content: ">";
+      margin-left: 10px;
+      color: var(--gold);
+    }
+
+    /* Faculty Panel */
+    .faculty-panel {
+      padding: 38px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #162f43, #1f4862);
+      color: #fff;
+    }
+
+    .faculty-panel .eyebrow {
+      color: #f0c978;
+    }
+
+    .policy-list p {
+      margin-top: 0;
+      color: rgba(255, 255, 255, 0.84);
+    }
+
+    .policy-list strong {
+      color: #fff;
+    }
+
+    /* Reasoning Panel */
+    .reasoning-panel {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.46), rgba(247, 240, 228, 0.62));
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .reasoning-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .reasoning-card {
+      padding: 24px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .reasoning-card h3 {
+      margin: 0 0 12px;
+    }
+
+    /* Roadmap */
+    .roadmap {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .roadmap-card {
+      padding: 24px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .roadmap-card span {
+      display: inline-block;
+      margin-bottom: 18px;
+      color: var(--gold);
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    /* Footer */
+    .footer {
+      padding: 32px 24px 42px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      text-align: center;
+      padding: 40px 24px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .cta-section p {
+      color: var(--muted);
+      margin-bottom: 20px;
+      font-size: 1.1rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1220px) {
+      .hero {
+        grid-template-columns: 1fr;
+        justify-content: start;
+        gap: 0;
+      }
+
+      .hero-copy {
+        max-width: 760px;
+        padding-top: 0;
+      }
+
+      .hero-visual {
+        max-width: 760px;
+        justify-self: start;
+        margin-top: 48px;
+      }
+
+      .hero-panel {
+        max-width: 720px;
+        margin-top: 0;
+        margin-left: 0;
+      }
+    }
+
+    @media (max-width: 1100px) {
+      .pipeline {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+      }
+    }
+
+    @media (max-width: 1050px) {
+      .hero,
+      .two-col,
+      .demo-stage,
+      .capability-grid,
+      .reasoning-grid,
+      .comparison-card,
+      .review-grid,
+      .roadmap {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-mini-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .pipeline {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .nav {
+        align-items: flex-start;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .review-wide {
+        grid-column: auto;
+      }
+
+      .review-checklist {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .hero {
+        padding-top: 54px;
+        padding-bottom: 52px;
+      }
+
+      .section {
+        padding-top: 58px;
+        padding-bottom: 58px;
+      }
+
+      .pipeline {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 2.85rem;
+        max-width: 8.6ch;
+        line-height: 1.08;
+        padding-right: 0;
+      }
+
+      .demo-shell {
+        padding: 12px;
+      }
+
+      .pipeline-step {
+        min-height: auto;
+      }
+
+      .timeline-item {
+        width: 100%;
+      }
+
+      .faculty-panel {
+        padding: 28px;
+      }
+
+      .demo-toolbar,
+      .review-header {
+        align-items: stretch;
+      }
+
+      .demo-controls,
+      .demo-actions {
+        width: 100%;
+      }
+
+      .tab,
+      .demo-actions .button {
+        flex: 1 1 auto;
+      }
+
+      .security-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .button,
+      .timeline-item,
+      .evidence-entry,
+      .evidence-fill {
+        transition: none;
+        animation: none;
+      }
+    }
+  </style>
 </head>
 <body>
   <header class="site-header">
@@ -25,10 +1383,9 @@
         <span>Socratic Assessment Platform</span>
       </a>
       <div class="nav-links">
-        <a href="#problem">Problem</a>
         <a href="#demo">Demo</a>
-        <a href="#live-dialogue">Live Dialogue</a>
         <a href="#paper-assessment">Paper Assessment</a>
+        <a href="#security">Security</a>
         <a href="#privacy">Faculty Control</a>
         <a href="#roadmap">Roadmap</a>
       </div>
@@ -45,16 +1402,13 @@
         <p class="hero-detail">Not a chatbot. Not an AI detector. A faculty-centered interface where learners explain, revise, apply, and make reasoning visible.</p>
         <div class="hero-actions">
           <button class="button primary" onclick="document.getElementById('demo').scrollIntoView()">See the dialogue flow</button>
-          <button class="button secondary" onclick="document.getElementById('live-dialogue').scrollIntoView()">Try Live Dialogue</button>
-          <button class="button secondary" onclick="document.getElementById('paper-assessment').scrollIntoView()">Test a Paper</button>
+          <button class="button secondary" onclick="document.getElementById('paper-assessment').scrollIntoView()">See Paper Assessment</button>
         </div>
         <p class="status-note">Public demo only: assessment layer visible, private implementation details protected.</p>
       </div>
       <div class="hero-visual">
         <div class="hero-panel" aria-label="Assessment architecture preview">
-          <div class="window-dots">
-            <span></span><span></span><span></span>
-          </div>
+          <div class="window-dots"><span></span><span></span><span></span></div>
           <div class="hero-stack">
             <article class="hero-card spotlight">
               <span class="pill">Assessment view</span>
@@ -84,7 +1438,9 @@
       </div>
     </section>
 
-    <!-- Original Demo Section -->
+    <div class="section-divider"></div>
+
+    <!-- Original Demo Section (Static) -->
     <section class="section demo-section" id="demo">
       <div class="section-heading centered">
         <p class="eyebrow">Live Dialogue Demo</p>
@@ -137,203 +1493,203 @@
       </div>
     </section>
 
-    <!-- Live Dialogue Section -->
-    <section class="section live-dialogue-section" id="live-dialogue">
-      <div class="section-heading centered">
-        <p class="eyebrow">Interactive</p>
-        <h2>Test Understanding in Real Time</h2>
-        <p>Engage students in a live Socratic dialogue to assess their grasp of key ethical concepts.</p>
-      </div>
-      <div class="live-dialogue-container">
-        <div class="dialogue-panel">
-          <div class="live-concept-selector">
-            <label for="liveConceptSelect">Select a Concept:</label>
-            <select id="liveConceptSelect">
-              <option value="fairness">Fairness</option>
-              <option value="autonomy">Autonomy</option>
-              <option value="utilitarianism">Utilitarianism</option>
-              <option value="kantianism">Kantian Ethics</option>
-              <option value="justice">Justice</option>
-            </select>
-            <button id="startLiveDialogueBtn" class="button primary small">Start Dialogue</button>
-            <button id="resetLiveDialogueBtn" class="button secondary small" disabled>Reset</button>
-          </div>
-          <div class="live-chat-window" id="liveChatMessages">
-            <div class="live-chat-message system">
-              <div class="live-message-role">System</div>
-              <p>Select a concept and click "Start Dialogue" to begin.</p>
-            </div>
-          </div>
-          <div class="live-chat-input">
-            <input type="text" id="liveStudentInput" placeholder="Type your response..." disabled>
-            <button id="liveSubmitBtn" class="button primary small" disabled>Submit</button>
-          </div>
-        </div>
-        <div class="live-scorecard">
-          <h3>Reasoning Scorecard</h3>
-          <p>Tracks the student's reasoning as they engage with the dialogue.</p>
-          <div class="live-scorecard-dimensions" id="liveScorecardDimensions">
-            <div class="live-scorecard-dimension">
-              <div class="live-scorecard-dimension-header">
-                <span class="live-scorecard-dimension-label">Definition</span>
-                <span class="live-scorecard-status">
-                  <span class="live-status-icon needs-work">❌</span>
-                  <span>Not started</span>
-                </span>
-              </div>
-              <div class="live-scorecard-dimension-notes">Waiting for student response.</div>
-            </div>
-            <div class="live-scorecard-dimension">
-              <div class="live-scorecard-dimension-header">
-                <span class="live-scorecard-dimension-label">Application</span>
-                <span class="live-scorecard-status">
-                  <span class="live-status-icon needs-work">❌</span>
-                  <span>Not started</span>
-                </span>
-              </div>
-              <div class="live-scorecard-dimension-notes">Waiting for student response.</div>
-            </div>
-            <div class="live-scorecard-dimension">
-              <div class="live-scorecard-dimension-header">
-                <span class="live-scorecard-dimension-label">Counterexample</span>
-                <span class="live-scorecard-status">
-                  <span class="live-status-icon needs-work">❌</span>
-                  <span>Not started</span>
-                </span>
-              </div>
-              <div class="live-scorecard-dimension-notes">Waiting for student response.</div>
-            </div>
-          </div>
-          <div class="live-follow-up">
-            <h4>Suggested Follow-Up</h4>
-            <p id="liveFollowUpText">Start the dialogue to see suggested follow-up questions.</p>
-          </div>
-        </div>
-      </div>
-    </section>
+    <div class="section-divider"></div>
 
-    <!-- Paper Assessment Section -->
+    <!-- Paper Assessment Section (Static Demo) -->
     <section class="section paper-assessment-section" id="paper-assessment">
       <div class="section-heading centered">
         <p class="eyebrow">Paper Assessment</p>
-        <h2>Test Understanding of AI-Generated Papers</h2>
-        <p>Students submit their papers, and the system asks Socratic questions to ensure they understand the content.</p>
+        <h2>See How It Works</h2>
+        <p>Here’s an example of how the system analyzes a paper and generates a Socratic dialogue to test understanding.</p>
       </div>
 
-      <!-- Paper Upload -->
-      <div class="paper-upload-container">
-        <div class="paper-upload-panel">
-          <div class="paper-upload-header">
-            <h3>Submit Your Paper</h3>
-            <p>Paste your paper text below. The system will ask you questions to test your understanding.</p>
-          </div>
-          <div class="paper-input">
-            <textarea id="paperText" class="paper-textarea" placeholder="Paste your paper here... (e.g., an essay on ethics, nursing, etc.)" rows="10"></textarea>
-            <div class="paper-actions">
-              <button id="clearPaperBtn" class="button secondary small">Clear</button>
-              <button id="analyzePaperBtn" class="button primary small">Analyze Paper</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Concept Extraction -->
-        <div class="concept-extraction-panel">
-          <h3>Detected Concepts</h3>
-          <p>Concepts found in your paper that will be tested:</p>
-          <div class="concepts-list" id="conceptsList">
-            <p style="color: var(--muted);">Submit a paper to see detected concepts.</p>
-          </div>
+      <!-- Static Paper Example -->
+      <div class="example-panel">
+        <h3>Sample Paper</h3>
+        <div class="paper-text">
+          <p><strong>Title:</strong> The Ethics of AI in Healthcare</p>
+          <p>In healthcare, <strong>autonomy</strong> is a critical principle. Patients have the right to make their own decisions about treatment, even if those decisions go against medical advice. However, <strong>autonomy</strong> must be balanced with <strong>beneficence</strong>, as healthcare providers have a duty to promote patient well-being. For example, a patient may refuse a life-saving treatment due to personal beliefs, but the provider must ensure the patient fully understands the consequences of their choice.</p>
         </div>
       </div>
 
-      <!-- Socratic Dialogue for Paper -->
-      <div class="paper-dialogue-container">
-        <div class="dialogue-panel">
-          <div class="paper-dialogue-header">
-            <h3>Socratic Dialogue About Your Paper</h3>
-            <p>Answer questions to demonstrate your understanding of the concepts in your paper.</p>
-          </div>
-          <div class="live-chat-window" id="paperChatMessages">
-            <div class="live-chat-message system">
-              <div class="live-message-role">System</div>
-              <p>Submit a paper to start the dialogue.</p>
-            </div>
-          </div>
-          <div class="live-chat-input">
-            <input type="text" id="paperStudentInput" placeholder="Type your response..." disabled>
-            <button id="paperSubmitBtn" class="button primary small" disabled>Submit</button>
-          </div>
+      <!-- Static Concepts -->
+      <div class="example-panel">
+        <h3>Detected Concepts</h3>
+        <p>Concepts found in the paper that would be tested:</p>
+        <div class="concepts-list">
+          <span class="concept-tag">Autonomy</span>
+          <span class="concept-tag">Beneficence</span>
         </div>
-        <div class="live-scorecard">
-          <h3>Understanding Scorecard</h3>
-          <p>Tracks your reasoning as you engage with the dialogue about your paper.</p>
-          <div class="live-scorecard-dimensions" id="paperScorecardDimensions">
-            <div class="live-scorecard-dimension">
-              <div class="live-scorecard-dimension-header">
-                <span class="live-scorecard-dimension-label">Definition</span>
-                <span class="live-scorecard-status">
-                  <span class="live-status-icon needs-work">❌</span>
-                  <span>Not started</span>
-                </span>
-              </div>
-              <div class="live-scorecard-dimension-notes">Waiting for paper submission.</div>
-            </div>
-            <div class="live-scorecard-dimension">
-              <div class="live-scorecard-dimension-header">
-                <span class="live-scorecard-dimension-label">Application</span>
-                <span class="live-scorecard-status">
-                  <span class="live-status-icon needs-work">❌</span>
-                  <span>Not started</span>
-                </span>
-              </div>
-              <div class="live-scorecard-dimension-notes">Waiting for paper submission.</div>
-            </div>
-            <div class="live-scorecard-dimension">
-              <div class="live-scorecard-dimension-header">
-                <span class="live-scorecard-dimension-label">Counterexample</span>
-                <span class="live-scorecard-status">
-                  <span class="live-status-icon needs-work">❌</span>
-                  <span>Not started</span>
-                </span>
-              </div>
-              <div class="live-scorecard-dimension-notes">Waiting for paper submission.</div>
-            </div>
+      </div>
+
+      <!-- Static Dialogue -->
+      <div class="example-panel">
+        <h3>Socratic Dialogue</h3>
+        <p>Example questions the system would ask based on the paper’s content:</p>
+        <div class="static-dialogue">
+          <div class="live-chat-message system">
+            <div class="live-message-role">System</div>
+            <p>Define 'autonomy' as used in your paper.</p>
           </div>
-          <div class="live-follow-up">
-            <h4>Faculty Review Notes</h4>
-            <p id="paperFollowUpText">Submit a paper to see faculty review notes.</p>
+          <div class="live-chat-message student">
+            <div class="live-message-role">Student</div>
+            <p>Autonomy is the right of patients to make their own decisions about their treatment, even if those decisions go against medical advice.</p>
+          </div>
+          <div class="live-chat-message system">
+            <div class="live-message-role">System</div>
+            <p>How does your paper apply the concept of autonomy?</p>
+          </div>
+          <div class="live-chat-message student">
+            <div class="live-message-role">Student</div>
+            <p>The paper applies autonomy by emphasizing that patients have the right to refuse treatment, even if it may lead to worse health outcomes.</p>
+          </div>
+          <div class="live-chat-message system">
+            <div class="live-message-role">System</div>
+            <p>Can autonomy ever be limited? Explain using an example from your paper.</p>
+          </div>
+          <div class="live-chat-message student">
+            <div class="live-message-role">Student</div>
+            <p>Yes, autonomy can be limited if the patient's decision would harm others. For example, a patient with a contagious disease may not have the autonomy to refuse quarantine.</p>
           </div>
         </div>
       </div>
 
-      <!-- Faculty Review Dashboard -->
+      <!-- Static Scorecard -->
+      <div class="example-panel">
+        <h3>Understanding Scorecard</h3>
+        <p>Example scorecard showing how the system tracks reasoning:</p>
+        <div class="static-scorecard-dimensions">
+          <div class="static-scorecard-dimension">
+            <div class="static-scorecard-dimension-header">
+              <span class="static-scorecard-dimension-label">Definition</span>
+              <span class="static-scorecard-status">
+                <span class="static-status-icon strong">✅</span>
+                <span>Strong</span>
+              </span>
+            </div>
+            <div class="static-scorecard-dimension-notes">Student demonstrated understanding of definition.</div>
+          </div>
+          <div class="static-scorecard-dimension">
+            <div class="static-scorecard-dimension-header">
+              <span class="static-scorecard-dimension-label">Application</span>
+              <span class="static-scorecard-status">
+                <span class="static-status-icon developing">🟡</span>
+                <span>Developing</span>
+              </span>
+            </div>
+            <div class="static-scorecard-dimension-notes">Student showed partial understanding of application.</div>
+          </div>
+          <div class="static-scorecard-dimension">
+            <div class="static-scorecard-dimension-header">
+              <span class="static-scorecard-dimension-label">Counterexample</span>
+              <span class="static-scorecard-status">
+                <span class="static-status-icon needs-work">❌</span>
+                <span>Needs Work</span>
+              </span>
+            </div>
+            <div class="static-scorecard-dimension-notes">Student did not fully address counterexamples.</div>
+          </div>
+        </div>
+        <div class="static-follow-up">
+          <h4>Faculty Review Notes</h4>
+          <p>Faculty would review the dialogue and scorecard to assess the student's understanding. In this example, the student demonstrated strong understanding of 'autonomy' but needs work on counterexamples.</p>
+        </div>
+      </div>
+
+      <!-- Static Faculty Dashboard -->
       <div class="faculty-review-container">
         <div class="faculty-review-panel">
           <h3>Faculty Review Dashboard</h3>
-          <p>Review the student's paper, dialogue, and understanding scorecard.</p>
-          <div class="review-grid" id="reviewGrid">
+          <p>Example of what faculty would see for this paper:</p>
+          <div class="review-grid">
             <article class="dashboard-card">
               <span class="card-label">Paper Text</span>
-              <div class="paper-text-preview" id="paperTextPreview">
-                <p style="color: var(--muted);">No paper submitted yet.</p>
+              <div class="paper-text-preview">
+                <p><strong>Title:</strong> The Ethics of AI in Healthcare</p>
+                <p>In healthcare, autonomy is a critical principle...</p>
               </div>
             </article>
             <article class="dashboard-card">
               <span class="card-label">Dialogue Transcript</span>
-              <div class="dialogue-transcript" id="dialogueTranscript">
-                <p style="color: var(--muted);">No dialogue yet.</p>
+              <div class="dialogue-transcript">
+                <div class="transcript-message system"><strong>System:</strong> Define 'autonomy' as used in your paper.</div>
+                <div class="transcript-message student"><strong>Student:</strong> Autonomy is the right of patients to make their own decisions...</div>
+                <div class="transcript-message system"><strong>System:</strong> How does your paper apply the concept of autonomy?</div>
+                <div class="transcript-message student"><strong>Student:</strong> The paper applies autonomy by emphasizing that patients have the right to refuse treatment...</div>
               </div>
             </article>
             <article class="dashboard-card review-wide">
               <span class="card-label">Red Flags</span>
-              <div class="red-flags-list" id="redFlagsList">
-                <p style="color: var(--muted);">No red flags detected.</p>
+              <div class="red-flags-list">
+                <div class="red-flag-item">Student did not fully address counterexamples in their paper.</div>
               </div>
             </article>
           </div>
         </div>
       </div>
     </section>
+
+    <div class="section-divider"></div>
+
+    <!-- Security Features Section -->
+    <section class="section security-section" id="security">
+      <div class="section-heading centered">
+        <p class="eyebrow">Security & Integrity</p>
+        <h2>Built to Prevent AI Cheating</h2>
+        <p>The platform includes multiple layers of protection to ensure students demonstrate genuine understanding and academic integrity.</p>
+      </div>
+      <div class="security-grid">
+        <div class="security-card">
+          <div class="security-icon">🔒</div>
+          <h3>Copy/Paste Disabled</h3>
+          <p>Students cannot copy or paste text into the assessment interface, forcing them to engage with the material directly and type their own responses.</p>
+          <div class="copy-protection-demo">
+            <div class="browser-mockup">
+              <div class="browser-header">
+                <span class="browser-dot"></span>
+                <span class="browser-dot"></span>
+                <span class="browser-dot"></span>
+                <span class="browser-title">Socratic Assessment Platform</span>
+              </div>
+              <div class="browser-content">
+                <div class="textarea-mockup" onclick="showCopyBlockedMessage()">
+                  <p>Paste your paper here...</p>
+                  <div class="copy-blocked-overlay">
+                    <span class="icon">🚫</span>
+                    <span>Copy/Paste Disabled</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="security-card">
+          <div class="security-icon">🗣️</div>
+          <h3>Socratic Dialogue</h3>
+          <p>Students must explain their paper's content in their own words through a guided dialogue, revealing true understanding rather than regurgitating AI-generated text.</p>
+        </div>
+        <div class="security-card">
+          <div class="security-icon">🚩</div>
+          <h3>Red Flag Detection</h3>
+          <p>Inconsistencies between a student's paper and their dialogue responses are automatically flagged for faculty review, such as when a student uses a term in their paper but cannot define it.</p>
+        </div>
+        <div class="security-card">
+          <div class="security-icon">👀</div>
+          <h3>Faculty Oversight</h3>
+          <p>Faculty review all dialogue and evidence before making final assessments. The platform supports instructor judgment rather than replacing it with automated grading.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <p>Want to test your own papers with the full reasoning model and security features?</p>
+      <button class="button primary large" onclick="window.location.href='mailto:info@socraticassessment.com?subject=Full Demo Request'">Request Full Demo Access</button>
+    </section>
+
+    <div class="section-divider"></div>
 
     <!-- Comparison Section -->
     <section class="section comparison-section" aria-labelledby="comparison-title">
@@ -365,6 +1721,8 @@
       </div>
     </section>
 
+    <div class="section-divider"></div>
+
     <!-- Faculty Control Section -->
     <section class="section two-col faculty-panel" id="privacy">
       <div>
@@ -376,9 +1734,10 @@
         <p><strong>No automatic grading claim.</strong> The public assessment experience does not present machine-generated scores as final academic decisions.</p>
         <p><strong>Not an AI detector.</strong> The platform examines reasoning through dialogue instead of making claims about authorship.</p>
         <p><strong>Evidence over verdicts.</strong> Dialogue produces reviewable evidence intended to help instructors make better assessment decisions.</p>
-        <p><strong>Institutional caution.</strong> Any real deployment would require approved governance, secure data handling, accessibility review, and faculty oversight.</p>
       </div>
     </section>
+
+    <div class="section-divider"></div>
 
     <!-- Reasoning Panel Section -->
     <section class="section reasoning-panel" id="reasoning-platform">
@@ -403,6 +1762,8 @@
         </article>
       </div>
     </section>
+
+    <div class="section-divider"></div>
 
     <!-- Roadmap Section -->
     <section class="section" id="roadmap">
@@ -439,6 +1800,328 @@
     <p>© 2026 Socratic Assessment Platform. Public-facing assessment experience only.</p>
   </footer>
 
-  <script src="assets/app.js"></script>
+  <!-- Toast Message for Copy/Paste Demo -->
+  <div class="toast-message" id="copyBlockedMessage">
+    <span>⚠️ Copy and paste are disabled in the real assessment platform to ensure academic integrity.</span>
+  </div>
+
+  <script>
+    // ============================================
+    // Original Demo Logic (Static Demo Only)
+    // ============================================
+    const demos = {
+      equity: {
+        moduleTitle: "EDU 410 · Equity and Schooling",
+        title: "Claim to Revision",
+        subtitle: "A learner moves from a broad claim toward a more defensible explanation.",
+        sequence: [
+          {
+            role: "Learner Claim",
+            speakerClass: "learner",
+            text: "Educational equity means giving every student the same resources, because equal treatment is the fairest approach."
+          },
+          {
+            role: "Socratic Follow-Up",
+            speakerClass: "system",
+            text: "If students begin with different barriers or needs, does equal distribution always produce equitable opportunity? Clarify the difference between equality and equity."
+          },
+          {
+            role: "Learner Revision",
+            speakerClass: "learner",
+            text: "I need to revise that. Equality gives the same support to everyone, but equity may require different support so students can reach comparable opportunities and outcomes."
+          },
+          {
+            role: "Evidence Update",
+            speakerClass: "summary",
+            text: "Evidence record updated: learner distinguishes equality from equity and revises the original claim under questioning."
+          },
+          {
+            role: "Instructor Summary",
+            speakerClass: "summary",
+            text: "Instructor receives a snapshot noting stronger conceptual distinction, successful revision, and a remaining need for a concrete classroom example."
+          }
+        ],
+        evidence: [
+          {
+            label: "Concept Distinction",
+            strength: "Improving",
+            status: "improving",
+            initialLevel: 25,
+            updatedLevel: 78,
+            revealAt: 2,
+            initial: "Initial claim blends equality and equity.",
+            updated: "Learner distinguishes equal treatment from equitable support."
+          },
+          {
+            label: "Justification",
+            strength: "Developing",
+            status: "developing",
+            initialLevel: 18,
+            updatedLevel: 62,
+            revealAt: 2,
+            initial: "Fairness is named, but the reason is thin.",
+            updated: "Learner connects differentiated support to comparable opportunity."
+          },
+          {
+            label: "Revision Quality",
+            strength: "Strong",
+            status: "strong",
+            initialLevel: 8,
+            updatedLevel: 86,
+            revealAt: 2,
+            initial: "No revision has been offered yet.",
+            updated: "Learner revises the original position after targeted questioning."
+          },
+          {
+            label: "Application / Transfer",
+            strength: "Needs Evidence",
+            status: "watch",
+            initialLevel: 12,
+            updatedLevel: 42,
+            revealAt: 3,
+            initial: "Needs a concrete classroom or policy example.",
+            updated: "Instructor should ask for a case to confirm transfer."
+          }
+        ],
+        summary: "Summary for instructor review: the learner improved the equality/equity distinction and revised the claim under questioning. The next faculty move is to request a concrete classroom or policy example before making a final judgment."
+      },
+      ethics: {
+        moduleTitle: "PHI 220 · Ethics and Public Life",
+        title: "Reasoning Under Pressure",
+        subtitle: "A learner clarifies a moral claim, answers a challenge, and refines the position.",
+        sequence: [
+          {
+            role: "Learner Claim",
+            speakerClass: "learner",
+            text: "Public officials should always tell the truth, because lying is what destroys trust."
+          },
+          {
+            role: "Socratic Follow-Up",
+            speakerClass: "system",
+            text: "What about a case where full disclosure would create immediate harm? Explain whether your principle allows exceptions or whether the duty remains absolute."
+          },
+          {
+            role: "Learner Revision",
+            speakerClass: "learner",
+            text: "I would revise the claim. Truthfulness should be the default duty, but an official may need to withhold some information temporarily when disclosure would directly endanger people. That is different from deceptive manipulation."
+          },
+          {
+            role: "Evidence Update",
+            speakerClass: "summary",
+            text: "Evidence record updated: learner moved from an absolute claim to a qualified principle and introduced a relevant distinction."
+          },
+          {
+            role: "Instructor Summary",
+            speakerClass: "summary",
+            text: "Instructor receives a snapshot noting stronger nuance, emerging policy reasoning, and a remaining follow-up about withholding versus deception."
+          }
+        ],
+        evidence: [
+          {
+            label: "Concept Distinction",
+            strength: "Improving",
+            status: "improving",
+            initialLevel: 30,
+            updatedLevel: 70,
+            revealAt: 2,
+            initial: "Truthfulness is clear, but exceptions are not distinguished.",
+            updated: "Learner distinguishes temporary withholding from manipulation."
+          },
+          {
+            label: "Justification",
+            strength: "Strong",
+            status: "strong",
+            initialLevel: 34,
+            updatedLevel: 82,
+            revealAt: 2,
+            initial: "Learner names trust as the reason but not its limits.",
+            updated: "Learner explains how duty and harm can come into tension."
+          },
+          {
+            label: "Revision Quality",
+            strength: "Strong",
+            status: "strong",
+            initialLevel: 10,
+            updatedLevel: 80,
+            revealAt: 2,
+            initial: "No revised position has been offered yet.",
+            updated: "Learner moves from an absolute claim to a qualified principle."
+          },
+          {
+            label: "Application / Transfer",
+            strength: "Needs Evidence",
+            status: "watch",
+            initialLevel: 16,
+            updatedLevel: 44,
+            revealAt: 3,
+            initial: "Needs another case to test the distinction.",
+            updated: "Instructor should test whether the distinction holds in a new case."
+          }
+        ],
+        summary: "Summary for instructor review: the learner showed stronger nuance after questioning, but the instructor should test whether the distinction between temporary withholding and deception is stable across cases."
+      }
+    };
+
+    // DOM Elements
+    const timeline = document.querySelector("#timeline");
+    const evidenceList = document.querySelector("#evidenceList");
+    const moduleTitle = document.querySelector("#moduleTitle");
+    const demoTitle = document.querySelector("#demoTitle");
+    const demoSubtitle = document.querySelector("#demoSubtitle");
+    const summaryStatus = document.querySelector("#summaryStatus");
+    const evidenceStatus = document.querySelector("#evidenceStatus");
+    const instructorSummary = document.querySelector("#instructorSummary");
+    const playDemoBtn = document.querySelector("#playDemoBtn");
+    const resetDemoBtn = document.querySelector("#resetDemoBtn");
+    const tabs = document.querySelectorAll(".tab");
+    const copyBlockedMessage = document.getElementById("copyBlockedMessage");
+
+    let activeDemoKey = "equity";
+    let currentStep = 0;
+    let isPlaying = false;
+    let animationTimers = [];
+
+    function clearAnimationTimers() {
+      animationTimers.forEach(timer => window.clearTimeout(timer));
+      animationTimers = [];
+    }
+
+    function renderDemo(key) {
+      const demo = demos[key];
+      activeDemoKey = key;
+      moduleTitle.textContent = demo.moduleTitle;
+      demoTitle.textContent = demo.title;
+      demoSubtitle.textContent = demo.subtitle;
+      
+      timeline.innerHTML = demo.sequence.map((step, index) => `
+        <article class="timeline-item ${step.speakerClass}" data-step="${index}">
+          <div class="timeline-role">${step.role}</div>
+          <p>${step.text}</p>
+        </article>
+      `).join("");
+
+      evidenceList.innerHTML = demo.evidence.map((item, index) => `
+        <article class="evidence-entry" data-evidence="${index}" data-status="${item.status}" style="--level: ${item.initialLevel}%">
+          <div class="evidence-topline">
+            <strong>${item.label}</strong>
+            <span class="strength">${item.strength}</span>
+          </div>
+          <div class="evidence-meter" aria-hidden="true"><span class="evidence-fill"></span></div>
+          <p>${item.initial}</p>
+        </article>
+      `).join("");
+
+      instructorSummary.textContent = demo.summary;
+      currentStep = 0;
+      isPlaying = false;
+      summaryStatus.textContent = "Waiting";
+      summaryStatus.classList.remove("ready");
+      evidenceStatus.textContent = "Ready";
+      revealInitialState();
+    }
+
+    function revealInitialState() {
+      clearAnimationTimers();
+      playDemoBtn.disabled = false;
+      document.querySelectorAll(".timeline-item").forEach((item, index) => {
+        item.classList.toggle("visible", index === 0);
+        item.classList.remove("active");
+      });
+      const firstItem = document.querySelector('.timeline-item[data-step="0"]');
+      if (firstItem) firstItem.classList.add("active");
+
+      document.querySelectorAll(".evidence-entry").forEach(entry => {
+        entry.classList.add("visible");
+        entry.classList.remove("highlight", "active-build");
+      });
+    }
+
+    function setEvidenceForStep(stepIndex) {
+      const demo = demos[activeDemoKey];
+      document.querySelectorAll(".evidence-entry").forEach((entry, evidenceIndex) => {
+        const item = demo.evidence[evidenceIndex];
+        const isUpdated = stepIndex >= item.revealAt;
+        entry.style.setProperty("--level", `${isUpdated ? item.updatedLevel : item.initialLevel}%`);
+        entry.querySelector("p").textContent = isUpdated ? item.updated : item.initial;
+        entry.classList.toggle("highlight", isUpdated);
+        entry.classList.toggle("active-build", stepIndex === item.revealAt);
+      });
+    }
+
+    function runDemoSequence() {
+      clearAnimationTimers();
+      const demo = demos[activeDemoKey];
+      const timelineItems = Array.from(document.querySelectorAll(".timeline-item"));
+      const evidenceItems = Array.from(document.querySelectorAll(".evidence-entry"));
+
+      timelineItems.forEach(item => item.classList.remove("visible", "active"));
+      evidenceItems.forEach((entry, index) => {
+        entry.classList.add("visible");
+        entry.classList.remove("highlight", "active-build");
+        entry.style.setProperty("--level", `${demo.evidence[index].initialLevel}%`);
+        entry.querySelector("p").textContent = demo.evidence[index].initial;
+      });
+      summaryStatus.textContent = "Sequence in progress";
+      summaryStatus.classList.remove("ready");
+      evidenceStatus.textContent = "Collecting";
+      instructorSummary.textContent = "The instructor summary is assembling from the dialogue and evidence updates.";
+      playDemoBtn.disabled = true;
+
+      timelineItems.forEach((item, index) => {
+        const timer = window.setTimeout(() => {
+          timelineItems.forEach(node => node.classList.remove("active"));
+          item.classList.add("visible", "active");
+          setEvidenceForStep(index);
+
+          if (index === 3) {
+            summaryStatus.textContent = "Evidence updated";
+            evidenceStatus.textContent = "Updated";
+          }
+
+          if (index === demo.sequence.length - 1) {
+            summaryStatus.textContent = "Ready for instructor review";
+            summaryStatus.classList.add("ready");
+            evidenceStatus.textContent = "Reviewable";
+            instructorSummary.textContent = demo.summary;
+            playDemoBtn.disabled = false;
+          }
+        }, index * 1000);
+        animationTimers.push(timer);
+      });
+    }
+
+    function resetDemo() {
+      renderDemo(activeDemoKey);
+    }
+
+    function showCopyBlockedMessage() {
+      copyBlockedMessage.style.display = 'block';
+      setTimeout(() => {
+        copyBlockedMessage.style.display = 'none';
+      }, 3000);
+    }
+
+    function initOriginalDemo() {
+      if (!timeline) return;
+
+      tabs.forEach(tab => {
+        tab.addEventListener("click", () => {
+          tabs.forEach(node => node.classList.remove("active"));
+          tab.classList.add("active");
+          activeDemoKey = tab.dataset.demo;
+          renderDemo(activeDemoKey);
+        });
+      });
+
+      playDemoBtn.addEventListener("click", runDemoSequence);
+      resetDemoBtn.addEventListener("click", resetDemo);
+      renderDemo(activeDemoKey);
+    }
+
+    // Initialize on DOM Load
+    document.addEventListener("DOMContentLoaded", () => {
+      initOriginalDemo();
+    });
+  </script>
 </body>
 </html>
