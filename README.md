@@ -26,9 +26,12 @@ The instructor remains the final evaluator. The platform produces evidence for r
 - a public-facing product vision
 - fictional sample dialogues
 - a formative evidence preview
-- a high-level paper-to-dialogue workflow
+- an interactive nursing ethics essay-to-dialogue example with an instructor evidence snapshot
+- a comparison of prepared weak and strong learner response paths
 - privacy, accessibility, and governance language
 - a roadmap for cautious institutional discussion
+
+The nursing example is a scripted, local-only prototype. Its sample claim map is prepared in advance, and typed responses select follow-up questions through simple keyword rules. It does not use generative AI, assess authorship, or block external AI assistance. Optional paste friction applies only to the response field and can be disabled for an accessibility accommodation. It is a light session control, not proctoring.
 
 ## What the public showcase does not do
 
