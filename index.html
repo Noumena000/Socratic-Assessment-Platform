@@ -214,6 +214,39 @@
     .workspace-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .workspace-pane { padding: 20px; border: 1px solid var(--line); border-radius: 18px; background: #faf8f4; }
     .workspace-pane h3 { margin-bottom: 12px; font-size: 1.45rem; }
+    .studio { padding: 92px 0; background: rgba(255,255,255,.52); border-block: 1px solid var(--line); }
+    .studio-shell { margin-top: 38px; overflow: hidden; border: 1px solid var(--line); border-radius: 24px; background: var(--surface); box-shadow: var(--shadow); }
+    .studio-head { display:flex; justify-content:space-between; align-items:center; gap:18px; padding:22px 28px; background:var(--navy); color:white; }
+    .studio-head p { margin:5px 0 0; color:#dce8ec; font-size:.9rem; }
+    .studio-head strong { font-size:1.05rem; }
+    .studio-content { padding:28px; }
+    .studio-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+    .studio-card { padding:22px; border:1px solid var(--line); border-radius:18px; background:#fbfaf7; }
+    .studio-card h3 { font-size:1.55rem; margin-bottom:12px; }
+    .studio-card p { margin:8px 0; }
+    .essay-copy { padding:16px; border-left:3px solid var(--gold); background:white; border-radius:0 12px 12px 0; }
+    .claim-list { display:grid; gap:9px; margin-top:14px; }
+    .claim { padding:12px; border:1px solid var(--line); border-radius:12px; background:white; font-size:.92rem; }
+    .claim strong { display:block; color:var(--navy); margin-bottom:3px; }
+    .studio-controls { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-top:14px; }
+    .studio-controls label, .friction-row { font-size:.88rem; }
+    .turn-box { margin-top:18px; padding:18px; border-radius:16px; background:#f1f5f3; }
+    .question-label { color:var(--sage); font-size:.73rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
+    .question-text { margin:6px 0 12px; font-weight:700; line-height:1.55; }
+    .response-box { display:block; width:100%; min-height:108px; padding:13px; resize:vertical; border:1px solid rgba(23,33,43,.24); border-radius:12px; background:white; color:var(--ink); font:inherit; line-height:1.55; }
+    .friction-row { display:flex; flex-wrap:wrap; align-items:center; gap:8px 14px; margin-top:12px; }
+    .friction-row label { display:flex; gap:7px; align-items:center; }
+    .demo-note { padding:11px 13px; border-radius:12px; background:#fff5e6; color:#684a20; font-size:.83rem; }
+    .dialogue-log { display:grid; gap:9px; margin-top:16px; }
+    .log-item { padding:12px 14px; border-radius:12px; background:white; border:1px solid var(--line); font-size:.9rem; line-height:1.55; }
+    .log-item.prompted { border-left:3px solid var(--gold); }
+    .log-meta { display:block; margin-bottom:4px; color:var(--muted); font-size:.7rem; font-weight:800; letter-spacing:.06em; text-transform:uppercase; }
+    .report { margin-top:18px; padding:20px; border:1px solid var(--line); border-radius:16px; background:#f7f8f6; }
+    .report-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:12px; }
+    .report-metric { padding:12px; background:white; border-radius:12px; }
+    .report-metric strong { display:block; font-size:.78rem; color:var(--sage); }
+    .report-metric span { font-size:.9rem; }
+    .status-chip { padding:7px 10px; border-radius:999px; background:rgba(255,255,255,.14); color:white; font-size:.75rem; font-weight:800; }
     .paper-copy { color: #3e4850; font-size: 0.92rem; }
     .concepts { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0; }
     .concept { padding: 7px 10px; border-radius: 999px; background: #edf3f1; color: var(--sage); font-size: 0.78rem; font-weight: 800; }
@@ -266,6 +299,8 @@
       .step-rail { display: flex; overflow: auto; border-right: 0; border-bottom: 1px solid var(--line); }
       .step { min-width: max-content; }
       .workspace-grid { grid-template-columns: 1fr; }
+      .studio-grid { grid-template-columns:1fr; }
+      .report-grid { grid-template-columns:1fr; }
     }
 
     @media (max-width: 720px) {
@@ -278,6 +313,8 @@
       .product-main { padding: 21px; }
       .demo-shell { padding: 10px; }
       .panel-inner, .workspace-content { padding: 18px; }
+      .studio-content { padding:16px; }
+      .studio-head { align-items:flex-start; flex-direction:column; padding:18px; }
       .panel-header, .workspace-top { display: block; }
       .badge { display: inline-flex; margin-top: 12px; }
       .faculty { padding: 28px; }
@@ -302,6 +339,7 @@
       </a>
       <nav class="nav-links" aria-label="Primary navigation">
         <a href="#demo">Dialogue Demo</a>
+        <a href="#essay-studio">Nursing ethics case</a>
         <a href="#paper">Paper Assessment</a>
         <a href="#principles">Principles</a>
         <a href="#roadmap">Roadmap</a>
@@ -318,7 +356,7 @@
         <p class="hero-detail">Not a chatbot. Not an AI detector. Learners explain, distinguish, apply, answer objections, and revise—creating evidence instructors can actually review.</p>
         <div class="actions">
           <button class="button primary" type="button" data-scroll-target="#demo">See the dialogue flow</button>
-          <button class="button secondary" type="button" data-scroll-target="#paper">Explore paper assessment</button>
+          <button class="button secondary" type="button" data-scroll-target="#essay-studio">Try nursing ethics case</button>
         </div>
         <p class="status-note">Public demonstration only. Faculty judgment remains central; private implementation details remain protected.</p>
       </div>
@@ -387,6 +425,55 @@
             </aside>
           </div>
           <p class="sr-only" id="demo-announcement" aria-live="assertive"></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="studio" id="essay-studio" aria-labelledby="studio-heading">
+      <div class="wrap">
+        <div class="section-head center">
+          <p class="eyebrow">Interactive nursing ethics case</p>
+          <h2 id="studio-heading">Follow the essay into a conversation the instructor can inspect.</h2>
+          <p>A sample argument becomes a concept map, then learner responses shape the next scripted prompt. Compare a shallow response path with a stronger one.</p>
+                <p class="demo-note">For this sample, the essay-to-claim map is prepared in advance and typed responses select among simple keyword-based branches. No generative AI is running in this demo.</p>
+        </div>
+        <div class="studio-shell">
+          <div class="studio-head">
+            <div><strong>Clinical ethics · treatment refusal</strong><p>Public, local-only demonstration · no learner data is sent</p></div>
+            <span class="status-chip">Scripted prototype · no AI service</span>
+          </div>
+          <div class="studio-content">
+            <div class="studio-grid">
+              <article class="studio-card">
+                <p class="eyebrow">1 · Submitted essay</p>
+                <h3>Respecting an informed refusal</h3>
+                <p class="essay-copy">When a patient with decision-making capacity refuses a recommended, life-saving treatment, the nurse should respect the patient’s informed choice. Autonomy gives people authority over decisions about their own bodies. Beneficence asks clinicians to promote wellbeing, but it does not give them permission to override a capable patient. The nurse should check understanding, explain likely consequences without coercion, assess whether the choice is voluntary, and continue compassionate care. If capacity is uncertain, the team should pause and seek an appropriate assessment rather than assume that disagreement means incapacity.</p>
+                <div class="studio-controls"><button class="button primary" id="analyze-essay" type="button">Map essay claims</button><span class="badge">Example text · not an authorship judgment</span></div>
+                <div class="claim-list" id="claim-map" aria-live="polite" aria-label="Claims and concepts"></div>
+              </article>
+              <article class="studio-card">
+                <p class="eyebrow">2 · Socratic dialogue</p>
+                <h3>What can the learner explain?</h3>
+                <p>Start with an open question grounded in the essay. Your response determines which of the prepared follow-ups appears next.</p>
+                <div class="turn-box" id="turn-box" hidden>
+                  <div class="question-label" id="question-label">Essay-grounded question</div>
+                  <div class="question-text" id="question-text"></div>
+                  <label for="learner-response"><strong>Your response</strong></label>
+                  <textarea class="response-box" id="learner-response" placeholder="Explain your reasoning in your own words…" aria-describedby="friction-note"></textarea>
+                  <div class="friction-row">
+                    <label><input type="checkbox" id="paste-friction"> Add paste friction for this response box</label>
+                    <label><input type="checkbox" id="accessibility-override"> Use an accessibility accommodation</label>
+                    <span id="friction-note">Friction discourages pasting here; it cannot prevent outside AI assistance.</span>
+                  </div>
+                  <div class="studio-controls"><button class="button primary" id="submit-response" type="button">Submit reflection</button><button class="button secondary" id="reset-studio" type="button">Start over</button></div>
+                  <p class="demo-note">Accommodation turns paste friction off. Learners can still use other devices or tools; this is a light session control, not proctoring or AI detection.</p>
+                </div>
+                <div class="studio-controls" id="path-controls"><button class="button secondary" data-path="weak" type="button">Preview: needs support</button><button class="button secondary" data-path="strong" type="button">Preview: strong reasoning</button><button class="button primary" id="start-custom" type="button">Try my own responses</button></div>
+                <div class="dialogue-log" id="dialogue-log" aria-live="polite"></div>
+                <div class="report" id="instructor-report" hidden aria-live="polite"></div>
+              </article>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -640,6 +727,145 @@
     document.querySelector("#play").addEventListener("click", play);
     document.querySelector("#reset").addEventListener("click", () => render(active));
     render(active);
+
+    // The nursing case below is intentionally a transparent, rule-based prototype.
+    const claims = [
+      ["Autonomy", "A capable patient may make an informed choice, including refusing treatment."],
+      ["Beneficence", "Promoting wellbeing matters, but does not by itself justify overriding a capable patient."],
+      ["Informed and voluntary choice", "The nurse checks understanding, explains consequences without coercion, and considers voluntariness."],
+      ["Decision-making capacity", "Uncertainty calls for appropriate assessment; disagreement alone is not proof of incapacity."]
+    ];
+    const claimMap = document.querySelector("#claim-map");
+    const turnBox = document.querySelector("#turn-box");
+    const questionText = document.querySelector("#question-text");
+    const response = document.querySelector("#learner-response");
+    const dialogueLog = document.querySelector("#dialogue-log");
+    const report = document.querySelector("#instructor-report");
+    const pasteFriction = document.querySelector("#paste-friction");
+    const accommodation = document.querySelector("#accessibility-override");
+    const openingQuestion = "The essay says capacity matters. What would you need to understand before supporting a patient’s refusal, and why?";
+    let turns = [];
+    let turnNumber = 0;
+    let demoPath = "custom";
+
+    function mapEssay() {
+      claimMap.replaceChildren();
+      claims.forEach(([title, detail]) => {
+        const item = document.createElement("div"); item.className = "claim";
+        const strong = document.createElement("strong"); strong.textContent = title;
+        const text = document.createElement("span"); text.textContent = detail;
+        item.append(strong, text); claimMap.append(item);
+      });
+      document.querySelector("#question-label").textContent = "Essay-grounded question · capacity + informed choice";
+    }
+
+    function startDialogue(path = "custom") {
+      turns = []; turnNumber = 0; demoPath = path;
+      dialogueLog.replaceChildren(); report.hidden = true; report.replaceChildren(); response.value = "";
+      questionText.textContent = openingQuestion; turnBox.hidden = false;
+      document.querySelector("#path-controls").hidden = true;
+      mapEssay();
+      appendLog("Socratic prompt · grounded in the submitted essay", openingQuestion);
+      if (path === "weak") runScriptedPath([
+        "I guess just do what they want.",
+        "The nurse should explain why the treatment is good."
+      ]);
+      if (path === "strong") runScriptedPath([
+        "I would check that the patient understands the likely consequences and is choosing voluntarily. If they have capacity, autonomy means their informed refusal still matters, even when the team believes treatment would help.",
+        "If the patient seems confused or their ability to decide changes, I would pause and ask the team to assess capacity rather than treating disagreement as proof. I would keep explaining without pressure and continue supportive care."
+      ]);
+      if (path === "custom") response.focus();
+    }
+
+    function responseStrength(text) {
+      const words = text.toLowerCase();
+      const cues = [/(capacity|capable|decision.?making)/, /(autonomy|right|choice|refus)/, /(understand|informed|consequence|risk)/, /(voluntar|coerc|pressure)/, /(beneficen|wellbeing|benefit|harm)/, /(assess|team|pause|revisit)/];
+      return cues.filter((re) => re.test(words)).length;
+    }
+
+    function appendLog(label, text, prompted = false) {
+      const entry = document.createElement("div"); entry.className = `log-item${prompted ? " prompted" : ""}`;
+      const meta = document.createElement("span"); meta.className = "log-meta"; meta.textContent = label;
+      const body = document.createElement("span"); body.textContent = text;
+      entry.append(meta, body); dialogueLog.append(entry);
+    }
+
+    function submitAnswer(text = response.value.trim()) {
+      if (!text) { response.focus(); response.setCustomValidity("Add a short reflection before continuing."); response.reportValidity(); return false; }
+      response.setCustomValidity("");
+      const strength = responseStrength(text);
+      const prompted = turnNumber > 0;
+      turns.push({text, strength, prompted});
+      appendLog(prompted ? "Learner response · after follow-up prompt" : "Learner response · initial, before follow-up", text, prompted);
+      response.value = "";
+      if (turnNumber === 0) {
+        questionText.textContent = strength >= 3
+          ? "Your answer links the choice to understanding and capacity. If the patient’s ability to decide seemed to fluctuate, what would you do next—and how would you avoid turning assessment into pressure?"
+          : "The essay links refusal to informed choice and capacity. What would help you tell whether this patient understands the likely consequences and is choosing freely?";
+        document.querySelector("#question-label").textContent = strength >= 3 ? "Adaptive follow-up · transfer and safeguards" : "Adaptive follow-up · clarify evidence";
+        appendLog("Socratic follow-up · selected by response cues", questionText.textContent);
+        turnNumber = 1;
+        if (demoPath === "custom") response.focus();
+        return true;
+      }
+      finishReport();
+      return true;
+    }
+
+    function finishReport() {
+      turnBox.hidden = true;
+      document.querySelector("#path-controls").hidden = false;
+      const independent = turns[0];
+      const prompted = turns[1];
+      const initialLevel = independent?.strength >= 3 ? "Several relevant concepts" : independent?.strength >= 1 ? "One concept named; reasoning needs development" : "Claim stated without supporting concepts";
+      const transfer = /capacity/i.test(prompted?.text || "") && /(assess|pause|team)/i.test(prompted?.text || "");
+      const laterLevel = transfer ? "Addresses capacity uncertainty and a next step after questioning" : prompted?.strength >= 2 ? "Several relevant concept cues after questioning" : prompted?.strength >= 1 ? "Some concepts appeared after questioning" : "Limited change after the follow-up";
+      const delta = transfer ? "Applied a capacity safeguard to the changed case" : (prompted?.strength || 0) > (independent?.strength || 0) ? "More concept cues appeared after prompting" : "No clear increase in concept cues after prompting";
+      report.hidden = false;
+      report.innerHTML = "";
+      const title = document.createElement("h3"); title.textContent = "Instructor evidence snapshot";
+      const intro = document.createElement("p"); intro.textContent = "Review the transcript in context. These rule-based cues are formative evidence, not a grade, authorship finding, or clinical judgment.";
+      const grid = document.createElement("div"); grid.className = "report-grid";
+      [["Before prompting · independent response", initialLevel], ["After prompting · prompted improvement", laterLevel], ["Change to inspect", delta]].forEach(([key,value]) => {
+        const metric = document.createElement("div"); metric.className="report-metric";
+        const label = document.createElement("strong"); label.textContent=key;
+        const detail = document.createElement("span"); detail.textContent=value;
+        metric.append(label,detail); grid.append(metric);
+      });
+      const next = document.createElement("p");
+      next.innerHTML = "<strong>Suggested instructor follow-up:</strong> Ask the learner to explain how their approach would change if capacity were uncertain, and what evidence would support that concern. Consider course rubric, context, and accessibility accommodations before evaluation.";
+      report.append(title,intro,grid,next);
+      report.scrollIntoView({block:"nearest",behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});
+    }
+
+    function runScriptedPath(answers) {
+      appendLog("Demonstration path", demoPath === "weak" ? "Needs support · prepared example responses" : "Strong reasoning · prepared example responses");
+      submitAnswer(answers[0]);
+      submitAnswer(answers[1]);
+    }
+
+    document.querySelector("#analyze-essay").addEventListener("click", () => {
+      mapEssay();
+      document.querySelector("#claim-map").scrollIntoView({block:"nearest",behavior:"smooth"});
+    });
+    document.querySelectorAll("[data-path]").forEach((button) => button.addEventListener("click", () => startDialogue(button.dataset.path)));
+    document.querySelector("#start-custom").addEventListener("click", () => startDialogue("custom"));
+    document.querySelector("#submit-response").addEventListener("click", () => submitAnswer());
+    response.addEventListener("input", () => response.setCustomValidity(""));
+    document.querySelector("#reset-studio").addEventListener("click", () => {
+      turns=[];turnNumber=0;demoPath="custom";response.value="";dialogueLog.replaceChildren();report.hidden=true;turnBox.hidden=true;document.querySelector("#path-controls").hidden=false;
+    });
+    accommodation.addEventListener("change", () => {
+      if (accommodation.checked) pasteFriction.checked = false;
+      pasteFriction.disabled = accommodation.checked;
+    });
+    response.addEventListener("paste", (event) => {
+      if (pasteFriction.checked && !accommodation.checked) {
+        event.preventDefault();
+        document.querySelector("#friction-note").textContent = "Paste was discouraged in this response box. Type your reflection, or select an accessibility accommodation. This cannot prevent outside AI assistance.";
+      }
+    });
+    mapEssay();
   </script>
 </body>
 </html>
